@@ -1,8 +1,8 @@
 package com;
 
 /**
- * Hello world!
- *
+ * 
+ *@author Sergio Campos Delgado
  */
 public class App 
 {
