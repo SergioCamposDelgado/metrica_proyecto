@@ -10,24 +10,26 @@ public class Usuario {
     protected String passwd;
     protected String name;
     protected double balance;
+    protected boolean esAdmin;
 
     /**
      * dinero inical por defecto
      */
     protected static final double initialBalance = 20.00;
 
-    public Usuario(String userName, String passwd, String name, double balance) {
+    public Usuario(String userName, String passwd, String name, double balance, boolean esAdmin) {
         this.userName = userName;
         this.passwd = passwd;
         this.name = name;
         this.balance = balance;
+        this.esAdmin = esAdmin;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    private String getPasswd() {
+    public String getPasswd() {
         return passwd;
     }
 
@@ -37,6 +39,14 @@ public class Usuario {
 
     public double getBalance() {
         return balance;
+    }
+
+    public boolean esAdmin() {
+        return esAdmin;
+    }
+
+    public static double getInitialBalance() {
+        return initialBalance;
     }
 
     public void setUserName(String userName) {
@@ -54,6 +64,12 @@ public class Usuario {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+    }
+
+    
 
     @Override
     public String toString() {
