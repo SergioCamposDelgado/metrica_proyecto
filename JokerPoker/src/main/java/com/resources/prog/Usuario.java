@@ -69,8 +69,6 @@ public class Usuario {
         this.esAdmin = esAdmin;
     }
 
-    
-
     @Override
     public String toString() {
         return name + "\t" + balance;
