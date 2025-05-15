@@ -4,7 +4,7 @@
  */
 package com.resources.prog;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *

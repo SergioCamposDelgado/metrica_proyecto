@@ -48,7 +48,7 @@ public class DAOUsuario {
             pst.setString(1, userName);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                u = new Usuario(rs.getString("userName"), rs.getString("passwd"), rs.getString("name"), Usuario.getInitialBalance(), false);
+                u = new Usuario(rs.getString("userName"), rs.getString("passwd"), rs.getString("name"), rs.getDouble("balance"), rs.getBoolean("esAdmin"));
             }
         } catch (SQLException e) {
             System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
