@@ -1,25 +1,50 @@
 package com.resources.prog;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Comparator;
+import java.util.Map;
+import javax.imageio.ImageIO;
 
 /**
- *
  * @author Sergio Campos Delgado
  */
-public class Carta implements Comparable {
+public class Carta implements Comparable<Carta> {
 
-    public static final char[] numeros = {'A', 'K', 'Q', 'J', '7', '6', '5', '4', '3', '2'};
-    public static final String[] palos = {"HEARTS", "SPADES", "CLUBS", "DIAMONDS"};
+    public static final String[] numeros = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    public static final String[] palos = {"SPADES", "HEARTS", "CLUBS", "DIAMONDS"};
 
-    protected char numero;
+    protected String numero;
     protected String palo;
+    protected BufferedImage sprite;
 
-    public Carta(int palo, int numero) {
-        this.palo = palos[palo];
-        this.numero = numeros[numero];
+    private static final CardSpriteLoader loader;
+
+    static {
+        CardSpriteLoader temp = null;
+        try {
+            temp = new CardSpriteLoader("8BitDeck.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loader = temp;
     }
 
-    public char getNumero() {
+    public Carta(int paloIndex, int numeroIndex) {
+        this.palo = palos[paloIndex];
+        this.numero = numeros[numeroIndex];
+        if (loader != null) {
+            try {
+                this.sprite = loader.getCard(this.palo.toLowerCase(), this.numero.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                this.sprite = null;
+            }
+        }
+    }
+
+    public String getNumero() {
         return numero;
     }
 
@@ -28,100 +53,161 @@ public class Carta implements Comparable {
     }
 
     public int getNumeroInt() {
-        int res = -1;
-        for (int i = 0; i < numeros.length && res == -1; i++) {
-            if (numeros[i] == numero) {
-                res = i;
-            }
+        switch (numero) {
+            case "2":
+                return 2;
+            case "3":
+                return 3;
+            case "4":
+                return 4;
+            case "5":
+                return 5;
+            case "6":
+                return 6;
+            case "7":
+                return 7;
+            case "8":
+                return 8;
+            case "9":
+                return 9;
+            case "10":
+                return 10;
+            case "J":
+                return 11;
+            case "Q":
+                return 12;
+            case "K":
+                return 13;
+            case "A":
+                return 14;
+            default:
+                return -1;
         }
-        return res;
     }
 
     public int getPaloInt() {
-        int res = -1;
-        for (int i = 0; i < palos.length && res == -1; i++) {
+        for (int i = 0; i < palos.length; i++) {
             if (palos[i].equals(palo)) {
-                res = i;
+                return i;
             }
         }
-        return res;
+        return -1;
+    }
+
+    public BufferedImage getSprite() {
+        return sprite;
     }
 
     @Override
     public String toString() {
-
-        String s = "";
-        s += numero;
-        s += " ";
-        s += palo;
-
-        return s;
+        return numero + " " + palo;
     }
 
     @Override
-    public int compareTo(Object o) {
-        Carta otro = (Carta) o;
-        int n1 = this.getNumeroInt(), n2 = otro.getNumeroInt(), p1 = this.getPaloInt(), p2 = otro.getPaloInt();
+    public int compareTo(Carta otro) {
+        int n1 = this.getNumeroInt(), n2 = otro.getNumeroInt();
+        int p1 = this.getPaloInt(), p2 = otro.getPaloInt();
 
         if (n1 > n2) {
-            return 2;
-        } else if (n2 > n1) {
             return -2;
-        } else if (p1 > p2) {
+        }
+        if (n2 > n1) {
+            return 2;
+        }
+        if (p1 > p2) {
             return 1;
-        } else if (p2 > p1) {
+        }
+        if (p2 > p1) {
             return -1;
-        } else {
+        }
+        return 0;
+    }
+
+    public static class ComparadorPorNumero implements Comparator<Carta> {
+
+        @Override
+        public int compare(Carta c1, Carta c2) {
+            return c1.compareTo(c2); // O usar lógica personalizada si quieres diferente orden
+        }
+    }
+
+    public static class ComparadorPorPalo implements Comparator<Carta> {
+
+        @Override
+        public int compare(Carta c1, Carta c2) {
+            int p1 = c1.getPaloInt(), p2 = c2.getPaloInt();
+            int n1 = c1.getNumeroInt(), n2 = c2.getNumeroInt();
+
+            if (p1 > p2) {
+                return 2;
+            }
+            if (p2 > p1) {
+                return -2;
+            }
+            if (n1 > n2) {
+                return -1;
+            }
+            if (n2 > n1) {
+                return 1;
+            }
             return 0;
         }
     }
 
-    public class ComparadorPorNumero implements Comparator {
+    public static class CardSpriteLoader {
 
-        @Override
-        public int compare(Object o1, Object o2) {
-            Carta c1 = (Carta) o1;
-            Carta c2 = (Carta) o2;
-            
-            int n1 = c1.getNumeroInt(), n2 = c2.getNumeroInt(), p1 = c1.getPaloInt(), p2 = c2.getPaloInt();
+        private final BufferedImage[][] cards;
+        private final Map<String, Integer> suitMap = Map.of(
+                "spades", 1, // Fila 1 en la imagen
+                "hearts", 0, // Fila 0 en la imagen
+                "clubs", 2, // Fila 2 en la imagen
+                "diamonds", 3 // Fila 3 en la imagen
+        );
 
-            if (n1 > n2) {
-                return 2;
-            } else if (n2 > n1) {
-                return -2;
-            } else if (p1 > p2) {
-                return 1;
-            } else if (p2 > p1) {
-                return -1;
-            } else {
-                return 0;
+        private final Map<String, Integer> valueMap = Map.ofEntries(
+                Map.entry("2", 0),
+                Map.entry("3", 1),
+                Map.entry("4", 2),
+                Map.entry("5", 3),
+                Map.entry("6", 4),
+                Map.entry("7", 5),
+                Map.entry("8", 6),
+                Map.entry("9", 7),
+                Map.entry("10", 8),
+                Map.entry("J", 9),
+                Map.entry("Q", 10),
+                Map.entry("K", 11),
+                Map.entry("A", 12)
+        );
+
+        public CardSpriteLoader(String pathToImage) throws IOException {
+            BufferedImage deckImage = ImageIO.read(new File(pathToImage));
+            int rows = 4;
+            int cols = 13;
+
+            int cardWidth = deckImage.getWidth() / cols;
+            int cardHeight = deckImage.getHeight() / rows;
+
+            cards = new BufferedImage[rows][cols];
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
+                    cards[row][col] = deckImage.getSubimage(
+                            col * cardWidth,
+                            row * cardHeight,
+                            cardWidth,
+                            cardHeight
+                    );
+                }
             }
         }
 
-    }
-
-    public class ComparadorPorPalo implements Comparator {
-
-        @Override
-        public int compare(Object o1, Object o2) {
-            Carta c1 = (Carta) o1;
-            Carta c2 = (Carta) o2;
-
-            int n1 = c1.getNumeroInt(), n2 = c2.getNumeroInt(), p1 = c1.getPaloInt(), p2 = c2.getPaloInt();
-            
-            if (p1 > p2) {
-                return 2;
-            } else if (p2 > p1) {
-                return -2;
-            } else if (n1 > n2) {
-                return 1;
-            } else if (n2 > n1) {
-                return -1;
-            } else {
-                return 0;
+        public BufferedImage getCard(String suit, String value) {
+            Integer row = suitMap.get(suit.toLowerCase());
+            Integer col = valueMap.get(value.toUpperCase());
+            if (row == null || col == null) {
+                throw new IllegalArgumentException("Palo o número inválido: " + suit + ", " + value);
             }
-
+            return cards[row][col];
         }
-
     }
 }
