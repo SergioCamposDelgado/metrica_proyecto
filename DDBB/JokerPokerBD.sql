@@ -12,7 +12,7 @@ CREATE TABLE Usuarios (
     );
 
 CREATE TABLE Partidas (
-    id varchar(25) NOT NULL,
+    id int NOT NULL,
     userWins boolean,
     fecha date,
     userName varchar(25) NOT NULL,
