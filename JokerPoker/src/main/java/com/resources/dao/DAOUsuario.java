@@ -38,17 +38,17 @@ public class DAOUsuario {
         }
     }
     
-    public Usuario getUsuario(String login) {
+    public Usuario getUsuario(String userName) {
         Usuario u = null;
         Connection conn = null;
         try {
             conn = conectarBD();
             PreparedStatement pst = conn.prepareStatement(
-                    "select * from usuarios where login = ?");
-            pst.setString(1, login);
+                    "select * from usuarios where userName = ?");
+            pst.setString(1, userName);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                u = new Usuario(login, rs.getString("passwd"), rs.getString("name"), Usuario.getInitialBalance(), false);
+                u = new Usuario(rs.getString("userName"), rs.getString("passwd"), rs.getString("name"), Usuario.getInitialBalance(), false);
             }
         } catch (SQLException e) {
             System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
@@ -60,10 +60,38 @@ public class DAOUsuario {
     }
     
     public void insertUsuario(Usuario u){
-
+        Connection conn = null;
+        try {
+            conn = conectarBD();
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO usuarios (userName, passwd, name, balance, esAdmin) VALUE (?, ?, ?, ?, ?)");
+            pst.setString(1, u.getUserName());
+            pst.setString(2, u.getPasswd());
+            pst.setString(3, u.getName());
+            pst.setDouble(4, u.getBalance());
+            pst.setBoolean(5, u.esAdmin());
+            ResultSet rs = pst.executeQuery();
+            
+        } catch (SQLException e) {
+            System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
+        } finally {
+            desconectarBD(conn);
+        }
+        
     }
     
     public void setAdmin (Usuario u) {
-    
+         Connection conn = null;
+        try {
+            conn = conectarBD();
+            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET esAdmin = true where userName = ?;");
+            pst.setString(1, u.getUserName());
+            ResultSet rs = pst.executeQuery();
+            
+        } catch (SQLException e) {
+            System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
+        } finally {
+            desconectarBD(conn);
+        }
+        
     }
 }
