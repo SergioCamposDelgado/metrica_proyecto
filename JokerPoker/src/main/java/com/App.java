@@ -177,6 +177,23 @@ public class App {
                         new Carta(3, 4) // 6
                 )
         );
+
+        probar("Empate",
+                List.of(
+                        new Carta(3, 12), // A
+                        new Carta(3, 0), // 2
+                        new Carta(3, 1), // 3
+                        new Carta(3, 2), // 4
+                        new Carta(3, 3) // 5
+                ),
+                List.of(
+                        new Carta(3, 12), // A
+                        new Carta(3, 0), // 2
+                        new Carta(3, 1), // 3
+                        new Carta(3, 2), // 4
+                        new Carta(3, 3) // 5
+                )
+        );
     }
 
     public static void probar(String titulo, List<Carta> mano1, List<Carta> mano2) {
