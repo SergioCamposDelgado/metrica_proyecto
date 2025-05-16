@@ -4,6 +4,10 @@
  */
 package com.jframe;
 
+import com.resources.dao.DAOUsuario;
+import com.resources.prog.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author greco
@@ -26,24 +30,54 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        cabecera = new javax.swing.JLabel();
+        botonRegistro = new javax.swing.JButton();
+        labelNombreUsuario = new javax.swing.JLabel();
+        textoNombreUsuario = new javax.swing.JTextField();
+        labelContraseña = new javax.swing.JLabel();
+        textoContraseña = new javax.swing.JPasswordField();
+        botonLogin = new javax.swing.JButton();
+        labelDialogoNombre = new javax.swing.JLabel();
+
+        jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JokerPoker - Login");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("JokerPoker - Login");
+        cabecera.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        cabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cabecera.setText("JokerPoker");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.setActionCommand("¿No esta registrado? Pulse aquí");
-        jButton1.setLabel("¿No esta registrado? Pulse aquí");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonRegistro.setToolTipText("");
+        botonRegistro.setActionCommand("¿No esta registrado? Pulse aquí");
+        botonRegistro.setLabel("¿No esta registrado? Pulse aquí");
+        botonRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonRegistroActionPerformed(evt);
+            }
+        });
+
+        labelNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelNombreUsuario.setText("Nombre de usuario:");
+
+        textoNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoNombreUsuarioActionPerformed(evt);
+            }
+        });
+
+        labelContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelContraseña.setText("Contraseña:");
+
+        botonLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonLogin.setText("Entrar");
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLoginActionPerformed(evt);
             }
         });
 
@@ -51,29 +85,103 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(cabecera, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(botonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelContraseña)
+                            .addComponent(labelNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(botonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDialogoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(94, 94, 94)
+                .addComponent(cabecera)
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombreUsuario))
+                .addGap(5, 5, 5)
+                .addComponent(labelDialogoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelContraseña)
+                    .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(botonLogin)
+                .addGap(43, 43, 43)
+                .addComponent(botonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
+
+    }//GEN-LAST:event_botonRegistroActionPerformed
+
+    private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
+        String login = textoNombreUsuario.getText();
+        String passwd = textoContraseña.getText();
+        if (login.isBlank()) { //Si el nombre está vacío
+            JOptionPane.showMessageDialog(labelDialogoNombre, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (passwd.isBlank()) { //Si la contraseña está vacía
+            JOptionPane.showMessageDialog(labelDialogoNombre, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            Usuario u = new DAOUsuario().getUsuario(login);
+            if (passwd.equals(u.getPasswd())) {
+                
+                if (u.esAdmin()) {
+                    
+                    
+                    
+                } else {
+                    
+                    
+                    
+                    
+                }
+                
+            System.out.println("Usuario:" + u.toString());    
+                
+            } else {
+                
+            JOptionPane.showMessageDialog(labelDialogoNombre, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);   
+                
+            }
+            
+        
+               
+        }
+
+    }//GEN-LAST:event_botonLoginActionPerformed
+
+    private void textoNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_textoNombreUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,7 +220,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botonLogin;
+    private javax.swing.JButton botonRegistro;
+    private javax.swing.JLabel cabecera;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelContraseña;
+    private javax.swing.JLabel labelDialogoNombre;
+    private javax.swing.JLabel labelNombreUsuario;
+    private javax.swing.JPasswordField textoContraseña;
+    private javax.swing.JTextField textoNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
