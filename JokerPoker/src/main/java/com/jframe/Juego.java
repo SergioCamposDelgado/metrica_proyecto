@@ -385,7 +385,16 @@ public class Juego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rendirseBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendirseBotonActionPerformed
-        // TODO add your handling code here:
+        if (contadorApuestas <= 4) {
+            boteDouble.setText(0.0 + "");
+            creditoDouble.setText(usuario.getBalance() + "");
+            cartasPlayerT.stream().forEach(c -> c.setIcon(null));
+            cartasJokerT.stream().forEach(c -> c.setIcon(null));
+            apostarBoton.setEnabled(false);
+            
+            pack();
+        }
+        
     }//GEN-LAST:event_rendirseBotonActionPerformed
 
     private void apostarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostarBotonActionPerformed
@@ -415,22 +424,18 @@ public class Juego extends javax.swing.JFrame {
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
-                System.out.println(usuario);
             } else if (cmp > 0) {
                 JOptionPane.showMessageDialog(this, "Has perdido", "Has perdido", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
-                System.out.println(usuario);
             } else {
                 JOptionPane.showMessageDialog(this, "Empate", "Empate", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
-                System.out.println(usuario);
-
             }
         }
 
@@ -474,9 +479,7 @@ public class Juego extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
                 new Juego(new Usuario("sergioscd", "123", "Sergio", 200.00, false)).setVisible(true);
-
             }
         });
     }
