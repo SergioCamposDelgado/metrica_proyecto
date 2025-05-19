@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -72,7 +73,7 @@ public class DAOUsuario {
             ResultSet rs = pst.executeQuery();
             
         } catch (SQLException e) {
-            System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
+            System.err.println("DAOUsuario, insertUsuario:" + e.getMessage());
         } finally {
             desconectarBD(conn);
         }
@@ -83,15 +84,36 @@ public class DAOUsuario {
          Connection conn = null;
         try {
             conn = conectarBD();
-            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET esAdmin = true where userName = ?;");
+            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET esAdmin = true where userName = ?");
             pst.setString(1, u.getUserName());
             ResultSet rs = pst.executeQuery();
             
         } catch (SQLException e) {
-            System.err.println("DAOUsuario, getUsuario:" + e.getMessage());
+            System.err.println("DAOUsuario, setAdmin:" + e.getMessage());
         } finally {
             desconectarBD(conn);
         }
         
     }
+    
+    public void setBalance (Usuario u) {
+         Connection conn = null;
+        try {
+            conn = conectarBD();
+            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET balance = ? where username = ?");
+            pst.setDouble(1, u.getBalance());
+            pst.setString(2, u.getUserName());
+            ResultSet rs = pst.executeQuery();
+            
+        } catch (SQLException e) {
+            System.err.println("DAOUsuario, setBalance:" + e.getMessage());
+        } finally {
+            desconectarBD(conn);
+        }
+        
+    }
+    
+    
+    
+    
 }
