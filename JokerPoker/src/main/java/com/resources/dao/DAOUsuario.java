@@ -117,7 +117,7 @@ public class DAOUsuario {
         
     }
     
-    public List <Usuario> getUsuarios() {
+    public List <Usuario> getUsuarios() { 
         List <Usuario> lista = null;
         Connection conn = null;
          try {

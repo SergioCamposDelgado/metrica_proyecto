@@ -1,3 +1,10 @@
+/*
+
+ Clase Usuario.
+
+ */
+
+
 package com.resources.prog;
 
 /**

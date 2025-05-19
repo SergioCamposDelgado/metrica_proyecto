@@ -50,7 +50,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelContraseña" min="-2" max="-2" attributes="0"/>
@@ -71,7 +71,6 @@
                       <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
                       <Component id="botonLogin" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="labelDialogoNombre" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -87,9 +86,7 @@
                   <Component id="textoNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Component id="labelDialogoNombre" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelContraseña" min="-2" max="-2" attributes="0"/>
                   <Component id="textoContraseña" min="-2" max="-2" attributes="0"/>
@@ -159,8 +156,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonLoginActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelDialogoNombre">
     </Component>
   </SubComponents>
 </Form>
