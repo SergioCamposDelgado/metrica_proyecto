@@ -54,7 +54,7 @@
                               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                               <Component id="textoContraseña" min="-2" pref="291" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="labelNombreUsuarioName" min="-2" pref="168" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="textoNombreUsuarioName" min="-2" pref="290" max="-2" attributes="0"/>
@@ -87,17 +87,17 @@
                   <Component id="labelNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textoNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelNombreUsuarioName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textoNombreUsuarioName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="textoContraseña" min="-2" max="-2" attributes="0"/>
                   <Component id="labelContraseña" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="125" max="32767" attributes="0"/>
+              <EmptySpace pref="157" max="32767" attributes="0"/>
               <Component id="botonAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="botonRegistro" min="-2" pref="52" max="-2" attributes="0"/>

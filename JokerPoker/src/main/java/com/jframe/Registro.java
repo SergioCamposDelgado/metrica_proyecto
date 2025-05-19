@@ -126,15 +126,15 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombreUsuario)
                     .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombreUsuarioName)
                     .addComponent(textoNombreUsuarioName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelContraseña))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(botonAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,10 +149,18 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-       String username = textoNombreUsuario.getText();
+       String login = textoNombreUsuario.getText();
        String nombre = textoNombreUsuarioName.getText();
        String passwd = textoContraseña.getText();
-       
+      
+       if (nombre.isBlank()) { //si el nombre del usuario está vacío
+          JOptionPane.showMessageDialog(this, "Debe introducir un nombre válido.", "Error", JOptionPane.ERROR_MESSAGE);
+       } else if (passwd.isBlank()) { //si la contraseña está vacía
+          JOptionPane.showMessageDialog(this, "Debe introducir una contraseña válida.", "Error", JOptionPane.ERROR_MESSAGE);
+       } else if (login.isBlank()) { //si el nombre de usuario está vacío
+          JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
+           
+       }
        
        
        

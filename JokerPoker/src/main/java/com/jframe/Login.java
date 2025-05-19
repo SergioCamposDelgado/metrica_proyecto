@@ -39,7 +39,6 @@ public class Login extends javax.swing.JFrame {
         labelContraseña = new javax.swing.JLabel();
         textoContraseña = new javax.swing.JPasswordField();
         botonLogin = new javax.swing.JButton();
-        labelDialogoNombre = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -95,7 +94,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(193, 193, 193)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelContraseña)
@@ -109,8 +108,7 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
-                        .addComponent(botonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelDialogoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(botonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,9 +120,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNombreUsuario))
-                .addGap(5, 5, 5)
-                .addComponent(labelDialogoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelContraseña)
                     .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,9 +142,9 @@ public class Login extends javax.swing.JFrame {
         String login = textoNombreUsuario.getText();
         String passwd = textoContraseña.getText();
         if (login.isBlank()) { //Si el nombre está vacío
-            JOptionPane.showMessageDialog(labelDialogoNombre, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (passwd.isBlank()) { //Si la contraseña está vacía
-            JOptionPane.showMessageDialog(labelDialogoNombre, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             
             Usuario u = new DAOUsuario().getUsuario(login);
@@ -170,7 +166,7 @@ public class Login extends javax.swing.JFrame {
                 
             } else {
                 
-            JOptionPane.showMessageDialog(labelDialogoNombre, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);   
+            JOptionPane.showMessageDialog(this, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);   
                 
             }
             
@@ -227,7 +223,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelContraseña;
-    private javax.swing.JLabel labelDialogoNombre;
     private javax.swing.JLabel labelNombreUsuario;
     private javax.swing.JPasswordField textoContraseña;
     private javax.swing.JTextField textoNombreUsuario;
