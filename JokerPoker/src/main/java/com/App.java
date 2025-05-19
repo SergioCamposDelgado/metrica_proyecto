@@ -56,8 +56,7 @@ public class App {
                 new Carta(0, 8) // 10 SPADES
         )
         );
-        
-        
+
         probar("Doble pareja baja vs Doble pareja alta",
                 List.of(
                         new Carta(0, 10), // Q SPADES
@@ -75,7 +74,24 @@ public class App {
                 )
         );
 
-        probar("Trío vs Doble pareja",
+        probar("Full House vs Full House",
+                List.of(
+                        new Carta(0, 11), // K
+                        new Carta(1, 11),
+                        new Carta(2, 11),
+                        new Carta(3, 12), // 4
+                        new Carta(0, 12) // 4
+                ),
+                List.of(
+                        new Carta(0, 11), // K
+                        new Carta(1, 11),
+                        new Carta(2, 11),
+                        new Carta(3, 5), // 4
+                        new Carta(0, 5) // 4
+                )
+        );
+
+        probar("Tri­o vs Doble pareja",
                 List.of(
                         new Carta(0, 9), // J SPADES
                         new Carta(1, 9), // J HEARTS
@@ -92,7 +108,7 @@ public class App {
                 )
         );
 
-        probar("Escalera vs Trío",
+        probar("Escalera vs TrÃ­o",
                 List.of(
                         new Carta(0, 4), // 6
                         new Carta(0, 5), // 7
@@ -261,11 +277,11 @@ public class App {
 
         int cmp = Baraja.compararManos(mano1, mano2);
         if (cmp < 0) {
-            System.out.println("→ Gana Mano 1\n");
+            System.out.println("Gana Mano 1\n");
         } else if (cmp > 0) {
-            System.out.println("→ Gana Mano 2\n");
+            System.out.println("Gana Mano 2\n");
         } else {
-            System.out.println("→ Empate\n");
+            System.out.println("Empate\n");
         }
 
         System.out.println();

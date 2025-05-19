@@ -231,7 +231,7 @@ public class Carta implements Comparable<Carta> {
             Integer row = paloMap.get(palo.toLowerCase());
             Integer col = valorMap.get(valor.toUpperCase());
             if (row == null || col == null) {
-                throw new IllegalArgumentException("Palo o número inválido: " + palo + ", " + valor);
+                throw new IllegalArgumentException("Palo o numero invalido: " + palo + ", " + valor);
             }
             return cards[row][col];
         }

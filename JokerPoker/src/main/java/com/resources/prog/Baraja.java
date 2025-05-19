@@ -136,7 +136,7 @@ public class Baraja {
                 res = "Escalera baja";
                 break;
             case 3:
-                res = "Trío";
+                res = "Trio";
                 break;
             case 2:
                 res = "Doble pareja";
@@ -181,12 +181,12 @@ public class Baraja {
             int v1 = -1, v2 = -1;
             int paso = 0;
             for (int i = 0; i < valores1.size() - 1 && paso < 2; i++) {
-                if (v1 == -1 && valores1.get(i) == valores1.get(i + 1)) {
+                if (v1 == -1 && valores1.get(i).equals(valores1.get(i + 1))) {
                     v1 = valores1.get(i);
                     paso++;
                 }
 
-                if (v2 == -1 && valores2.get(i) == valores2.get(i + 1)) {
+                if (v2 == -1 && valores2.get(i).equals(valores2.get(i + 1))) {
                     v2 = valores2.get(i);
                     paso++;
                 }
@@ -203,25 +203,28 @@ public class Baraja {
             List<Integer> valores1 = obtenerValoresOrdenados(mano1);
             List<Integer> valores2 = obtenerValoresOrdenados(mano2);
 
-            int v1 = -1, v2 = -1, v1b = -1, v2b = -1;;
+            int v1 = -1, v2 = -1, v1b = -1, v2b = -1;
             for (int i = 0; i < valores1.size() - 1; i++) {
-                if (v1 == -1 && valores1.get(i) == valores1.get(i + 1)) {
+                if (v1 == -1 && valores1.get(i).equals(valores1.get(i + 1))) {
                     v1 = valores1.get(i);
                 }
 
-                if (v2 == -1 && valores2.get(i) == valores2.get(i + 1)) {
+                if (v2 == -1 && valores2.get(i).equals(valores2.get(i + 1))) {
                     v2 = valores2.get(i);
                 }
 
-                if (v1 != -1 && v1b == -1 && valores1.get(i) == valores1.get(i + 1)) {
-                    v1b = valores1.get(i);
+                if (v1b == -1 && valores1.get(i).equals(valores1.get(i + 1))) {
+                    if (v1 != valores1.get(i)) {
+                        v1b = valores1.get(i);
+                    }
                 }
 
-                if (v2 != -1 && v2b == -1 && valores2.get(i) == valores2.get(i + 1)) {
-                    v2b = valores2.get(i);
+                if (v2b == -1 && valores2.get(i).equals(valores2.get(i + 1))) {
+                    if (v2 != valores2.get(i)) {
+                        v2b = valores2.get(i);
+                    }
                 }
             }
-
             int cmp = 0;
             if (v1 != v2) {
                 cmp = Integer.compare(v2, v1);
