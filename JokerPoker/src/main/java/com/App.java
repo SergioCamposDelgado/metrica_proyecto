@@ -10,8 +10,8 @@ public class App {
 
         probar("Par bajo vs Par alto",
                 List.of(
-                        new Carta(0, 0), // 2 SPADES
-                        new Carta(1, 0), // 2 HEARTS
+                        new Carta(0, 12), // A SPADES
+                        new Carta(1, 12), // A HEARTS
                         new Carta(2, 5), // 7 CLUBS
                         new Carta(3, 9), // J DIAMONDS
                         new Carta(0, 8) // 10 SPADES
@@ -22,6 +22,56 @@ public class App {
                         new Carta(0, 4), // 6 SPADES
                         new Carta(1, 7), // 9 HEARTS
                         new Carta(2, 6) // 8 CLUBS
+                )
+        );
+
+        probar("Trio bajo vs Trio alto",
+                List.of(
+                        new Carta(2, 11), // K CLUBS
+                        new Carta(3, 11), // K DIAMONDS
+                        new Carta(0, 4), // 6 SPADES
+                        new Carta(1, 11), // K HEARTS
+                        new Carta(2, 6) // 8 CLUBS
+                ), List.of(
+                new Carta(0, 12), // A SPADES
+                new Carta(1, 12), // A HEARTS
+                new Carta(2, 5), // 7 CLUBS
+                new Carta(3, 12), // A DIAMONDS
+                new Carta(0, 8) // 10 SPADES
+        )
+        );
+
+        probar("Poker bajo vs Poker alto",
+                List.of(
+                        new Carta(2, 11), // K CLUBS
+                        new Carta(3, 11), // K DIAMONDS
+                        new Carta(0, 11), // K SPADES
+                        new Carta(1, 11), // K HEARTS
+                        new Carta(2, 6) // 8 CLUBS
+                ), List.of(
+                new Carta(0, 12), // A SPADES
+                new Carta(1, 12), // A HEARTS
+                new Carta(2, 12), // A CLUBS
+                new Carta(3, 12), // A DIAMONDS
+                new Carta(0, 8) // 10 SPADES
+        )
+        );
+        
+        
+        probar("Doble pareja baja vs Doble pareja alta",
+                List.of(
+                        new Carta(0, 10), // Q SPADES
+                        new Carta(1, 10), // Q HEARTS
+                        new Carta(2, 4), // 6 CLUBS
+                        new Carta(3, 4), // 6 DIAMONDS
+                        new Carta(0, 7) // 9 SPADES
+                ),
+                List.of(
+                        new Carta(0, 10), // Q SPADES
+                        new Carta(1, 10), // Q HEARTS
+                        new Carta(2, 3), // 5 CLUBS
+                        new Carta(3, 3), // 5 DIAMONDS
+                        new Carta(0, 7) // 9 SPADES
                 )
         );
 

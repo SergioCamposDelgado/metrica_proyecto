@@ -127,7 +127,7 @@ public class Carta implements Comparable<Carta> {
 
         @Override
         public int compare(Carta c1, Carta c2) {
-            return c1.compareTo(c2); // O usar lógica personalizada si quieres diferente orden
+            return c1.compareTo(c2);
         }
     }
 
@@ -157,14 +157,39 @@ public class Carta implements Comparable<Carta> {
     public static class CardSpriteLoader {
 
         private final BufferedImage[][] cards;
-        private final Map<String, Integer> suitMap = Map.of(
-                "spades", 1, // Fila 1 en la imagen
+        private static BufferedImage fondoCartas;
+        private static BufferedImage fondoCarta;
+        private static BufferedImage topJoker;
+        private static BufferedImage topPlayer;
+
+        static {
+            BufferedImage fondoCartas = null;
+            BufferedImage fondoCarta = null;
+            BufferedImage topJoker = null;
+            BufferedImage topPlayer = null;
+            try {
+                fondoCartas = ImageIO.read(new File("fondoCartas.png"));
+                fondoCarta = ImageIO.read(new File("fondoCarta.png"));
+                topJoker = ImageIO.read(new File("topJoker.png"));
+                topPlayer = ImageIO.read(new File("topPlayer.png"));
+            } catch (IOException e) {
+                System.out.println("Cartas.CardSpriteLoader: ");
+                e.printStackTrace();
+            }
+            CardSpriteLoader.fondoCartas = fondoCartas;
+            CardSpriteLoader.fondoCarta = fondoCarta;
+            CardSpriteLoader.topJoker = topJoker;
+            CardSpriteLoader.topPlayer = topPlayer;
+        }
+
+        static private final Map<String, Integer> paloMap = Map.of(
+                "spades", 3, // Fila 3 en la imagen
                 "hearts", 0, // Fila 0 en la imagen
-                "clubs", 2, // Fila 2 en la imagen
-                "diamonds", 3 // Fila 3 en la imagen
+                "clubs", 1, // Fila 1 en la imagen
+                "diamonds", 2 // Fila 2 en la imagen
         );
 
-        private final Map<String, Integer> valueMap = Map.ofEntries(
+        private final Map<String, Integer> valorMap = Map.ofEntries(
                 Map.entry("2", 0),
                 Map.entry("3", 1),
                 Map.entry("4", 2),
@@ -180,18 +205,18 @@ public class Carta implements Comparable<Carta> {
                 Map.entry("A", 12)
         );
 
-        public CardSpriteLoader(String pathToImage) throws IOException {
-            BufferedImage deckImage = ImageIO.read(new File(pathToImage));
+        public CardSpriteLoader(String imagenPath) throws IOException {
+            BufferedImage deckImagen = ImageIO.read(new File(imagenPath));
             int rows = 4;
             int cols = 13;
 
-            int cardWidth = deckImage.getWidth() / cols;
-            int cardHeight = deckImage.getHeight() / rows;
+            int cardWidth = deckImagen.getWidth() / cols;
+            int cardHeight = deckImagen.getHeight() / rows;
 
             cards = new BufferedImage[rows][cols];
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < cols; col++) {
-                    cards[row][col] = deckImage.getSubimage(
+                    cards[row][col] = deckImagen.getSubimage(
                             col * cardWidth,
                             row * cardHeight,
                             cardWidth,
@@ -199,15 +224,32 @@ public class Carta implements Comparable<Carta> {
                     );
                 }
             }
+
         }
 
-        public BufferedImage getCard(String suit, String value) {
-            Integer row = suitMap.get(suit.toLowerCase());
-            Integer col = valueMap.get(value.toUpperCase());
+        public BufferedImage getCard(String palo, String valor) {
+            Integer row = paloMap.get(palo.toLowerCase());
+            Integer col = valorMap.get(valor.toUpperCase());
             if (row == null || col == null) {
-                throw new IllegalArgumentException("Palo o número inválido: " + suit + ", " + value);
+                throw new IllegalArgumentException("Palo o número inválido: " + palo + ", " + valor);
             }
             return cards[row][col];
+        }
+
+        public static BufferedImage getFondoCartas() {
+            return fondoCartas;
+        }
+
+        public static BufferedImage getFondoCarta() {
+            return fondoCarta;
+        }
+
+        public static BufferedImage getTopJoker() {
+            return topJoker;
+        }
+
+        public static BufferedImage getTopPlayer() {
+            return topPlayer;
         }
     }
 }

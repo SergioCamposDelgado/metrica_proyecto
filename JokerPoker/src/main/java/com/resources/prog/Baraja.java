@@ -160,17 +160,79 @@ public class Baraja {
             return Integer.compare(valor2, valor1);
         }
 
-        // Si ambas manos son Carta alta (valor 0), comparamos los kickers
-        List<Integer> valores1 = obtenerValoresOrdenados(mano1);
-        List<Integer> valores2 = obtenerValoresOrdenados(mano2);
+        // Si ambas manos son Carta alta, Escalera, Escalera de color o color, comparamos los valores
+        if (valor1 == 0 || valor1 == 10 || valor1 == 5 || valor1 == 6) {
+            List<Integer> valores1 = obtenerValoresOrdenados(mano1);
+            List<Integer> valores2 = obtenerValoresOrdenados(mano2);
 
-        for (int i = 0; i < valores1.size(); i++) {
-            int cmp = Integer.compare(valores2.get(i), valores1.get(i));
+            for (int i = 0; i < valores1.size(); i++) {
+                int cmp = Integer.compare(valores2.get(i), valores1.get(i));
+                if (cmp != 0) {
+                    return cmp;
+                }
+            }
+        }
+
+        // Si ambas manos son Pareja, Trio o Poker, comaparamos esas cartas
+        if (valor1 == 8 || valor1 == 3 || valor1 == 1) {
+            List<Integer> valores1 = obtenerValoresOrdenados(mano1);
+            List<Integer> valores2 = obtenerValoresOrdenados(mano2);
+
+            int v1 = -1, v2 = -1;
+            int paso = 0;
+            for (int i = 0; i < valores1.size() - 1 && paso < 2; i++) {
+                if (v1 == -1 && valores1.get(i) == valores1.get(i + 1)) {
+                    v1 = valores1.get(i);
+                    paso++;
+                }
+
+                if (v2 == -1 && valores2.get(i) == valores2.get(i + 1)) {
+                    v2 = valores2.get(i);
+                    paso++;
+                }
+            }
+
+            int cmp = Integer.compare(v2, v1);
             if (cmp != 0) {
                 return cmp;
             }
         }
 
+        // Si ambas manos son Full House o Doble pareja, comparamos los valores
+        if (valor1 == 7 || valor1 == 2) {
+            List<Integer> valores1 = obtenerValoresOrdenados(mano1);
+            List<Integer> valores2 = obtenerValoresOrdenados(mano2);
+
+            int v1 = -1, v2 = -1, v1b = -1, v2b = -1;;
+            for (int i = 0; i < valores1.size() - 1; i++) {
+                if (v1 == -1 && valores1.get(i) == valores1.get(i + 1)) {
+                    v1 = valores1.get(i);
+                }
+
+                if (v2 == -1 && valores2.get(i) == valores2.get(i + 1)) {
+                    v2 = valores2.get(i);
+                }
+
+                if (v1 != -1 && v1b == -1 && valores1.get(i) == valores1.get(i + 1)) {
+                    v1b = valores1.get(i);
+                }
+
+                if (v2 != -1 && v2b == -1 && valores2.get(i) == valores2.get(i + 1)) {
+                    v2b = valores2.get(i);
+                }
+            }
+
+            int cmp = 0;
+            if (v1 != v2) {
+                cmp = Integer.compare(v2, v1);
+            } else {
+                cmp = Integer.compare(v2b, v1b);
+            }
+
+            if (cmp != 0) {
+                return cmp;
+            }
+        }
         // Si ambas manos tienen el mismo valor y las cartas son iguales (total empate)
         return 0;
     }
@@ -181,6 +243,8 @@ public class Baraja {
                 .map(c -> c.getNumeroInt())
                 .sorted((a, b) -> b - a) // Orden descendente
                 .collect(Collectors.toList());
+
         return valores;
+
     }
 }
