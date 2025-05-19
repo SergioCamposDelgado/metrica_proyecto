@@ -135,7 +135,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
-
+    //abre el menú de registro
+    Registro abrir = new Registro();
+    abrir.setVisible(true);
+    this.setVisible(false);
+    dispose();
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
@@ -146,11 +150,11 @@ public class Login extends javax.swing.JFrame {
         } else if (passwd.isBlank()) { //Si la contraseña está vacía
             JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            
+
             Usuario u = new DAOUsuario().getUsuario(login);
-            
-            if (passwd.equals(u.getPasswd())) {//Si la contraseña introducida no es correcta
-                
+            if (u == null) {
+                JOptionPane.showMessageDialog(this, "El usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (passwd.equals(u.getPasswd())) {//Si la contraseña introducida no es correcta 
                 if (u.esAdmin()) { //Si el usuario es admin
                     
                     
@@ -158,7 +162,11 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     
                     
-                    
+                MenuUser menu = new MenuUser(u);
+                this.setVisible(false);
+                menu.setVisible(true);
+                    System.out.println("4");
+                dispose();
                     
                 }
                 
