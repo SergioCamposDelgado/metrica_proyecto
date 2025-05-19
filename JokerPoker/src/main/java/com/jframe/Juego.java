@@ -391,10 +391,10 @@ public class Juego extends javax.swing.JFrame {
             cartasPlayerT.stream().forEach(c -> c.setIcon(null));
             cartasJokerT.stream().forEach(c -> c.setIcon(null));
             apostarBoton.setEnabled(false);
-            
+
             pack();
         }
-        
+
     }//GEN-LAST:event_rendirseBotonActionPerformed
 
     private void apostarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostarBotonActionPerformed
@@ -417,7 +417,8 @@ public class Juego extends javax.swing.JFrame {
             int cmp = Baraja.compararManos(manoPlayer, manoJoker);
 
             if (cmp < 0) {
-                JOptionPane.showMessageDialog(this, "Has ganado", "Has ganado", JOptionPane.INFORMATION_MESSAGE);
+                int valor = Baraja.evaluarMano(manoPlayer);
+                JOptionPane.showMessageDialog(this, "Has ganado por " + Baraja.descripcionMano(valor), "Has ganado", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
                     usuario.setBalance(usuario.getBalance() + bote);
 
@@ -425,14 +426,18 @@ public class Juego extends javax.swing.JFrame {
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
             } else if (cmp > 0) {
-                JOptionPane.showMessageDialog(this, "Has perdido", "Has perdido", JOptionPane.INFORMATION_MESSAGE);
+                int valor = Baraja.evaluarMano(manoJoker);
+                JOptionPane.showMessageDialog(this, "Has perdido por " + Baraja.descripcionMano(valor), "Has perdido", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Empate", "Empate", JOptionPane.INFORMATION_MESSAGE);
+                int valor = Baraja.evaluarMano(manoJoker);
+                JOptionPane.showMessageDialog(this, "Empate por " + Baraja.descripcionMano(valor), "Empate", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
+                    usuario.setBalance(usuario.getBalance() + (bote / 2.0));
+
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
