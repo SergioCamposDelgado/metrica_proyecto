@@ -66,13 +66,13 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
-                      <Component id="botonAceptar" min="-2" pref="106" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
                       <Component id="botonRegistro" min="-2" pref="374" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="botonAceptar" min="-2" pref="106" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -97,9 +97,9 @@
                   <Component id="textoContraseña" min="-2" max="-2" attributes="0"/>
                   <Component id="labelContraseña" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+              <EmptySpace pref="125" max="32767" attributes="0"/>
               <Component id="botonAceptar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="9" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="botonRegistro" min="-2" pref="52" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
           </Group>

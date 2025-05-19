@@ -13,6 +13,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,6 +27,7 @@ public class DAOUsuario {
         String url = "jdbc:mariadb://localhost:3306/JokerPokerDB";
         String usuario = "programacion";
         String contraseña = "programacion";
+        
         
     public Connection conectarBD() throws SQLException  {
             Connection conn = DriverManager.getConnection(url, usuario, contraseña);
@@ -111,6 +115,40 @@ public class DAOUsuario {
             desconectarBD(conn);
         }
         
+    }
+    
+    public List <Usuario> getUsuarios() {
+        List <Usuario> lista = null;
+        Connection conn = null;
+         try {
+             lista = new ArrayList<Usuario>();
+            conn = conectarBD();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM usuarios");
+            while (rs.next()) {
+              Usuario u1 = new Usuario(
+              rs.getString("userName"),
+              rs.getString("passwd"),
+              rs.getString("name"),
+              rs.getDouble("balance"),
+              rs.getBoolean("esAdmin")
+              
+              );
+                
+              
+             lista.add(u1);
+                
+                
+            }
+            
+            
+        } catch (SQLException e) {
+            System.err.println("DAOUsuario, setBalance:" + e.getMessage());
+        } finally {
+            desconectarBD(conn);
+        }
+   
+        return lista;
     }
     
     
