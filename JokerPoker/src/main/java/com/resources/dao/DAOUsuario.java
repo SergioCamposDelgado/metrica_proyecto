@@ -103,7 +103,7 @@ public class DAOUsuario {
             PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET balance = ? where username = ?");
             pst.setDouble(1, u.getBalance());
             pst.setString(2, u.getUserName());
-            ResultSet rs = pst.executeQuery();
+            pst.execute();
 
         } catch (SQLException e) {
             System.err.println("DAOUsuario, setBalance:" + e.getMessage());
@@ -117,7 +117,7 @@ public class DAOUsuario {
         List<Usuario> lista = null;
         Connection conn = null;
         try {
-            lista = new ArrayList<Usuario>();
+            lista = new ArrayList();
             conn = conectarBD();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM usuarios");
@@ -142,5 +142,25 @@ public class DAOUsuario {
 
         return lista;
     }
+        public void updateInfo(Usuario u) {
+        Connection conn = null;
+        try {
+            conn = conectarBD();
+            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET passwd = ?, name = ?, balance = ?, esAdmin = ? WHERE username = ?");
+            pst.setString(1, u.getPasswd());
+            pst.setString(1, u.getName());
+            pst.setDouble(1, u.getBalance());
+            pst.setBoolean(1, u.esAdmin());
+            pst.setString(1, u.getUserName());
+            pst.execute();
+
+        } catch (SQLException e) {
+            System.err.println("DAOUsuario, updateInfo:" + e.getMessage());
+        } finally {
+            desconectarBD(conn);
+        }
+
+    }
+    
 
 }

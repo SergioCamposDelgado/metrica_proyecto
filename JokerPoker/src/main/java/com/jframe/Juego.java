@@ -1,9 +1,13 @@
 package com.jframe;
 
+import com.resources.dao.DAOPartida;
 import com.resources.dao.DAOUsuario;
 import com.resources.prog.Baraja;
 import com.resources.prog.Carta;
+import com.resources.prog.Partida;
 import com.resources.prog.Usuario;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -452,6 +456,12 @@ public class Juego extends javax.swing.JFrame {
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
             }
+            
+            boolean gano = cmp<0;
+            
+            DAOPartida daoP = new DAOPartida();
+            Partida partida = new Partida ((daoP.getMaxID()+1) , usuario, gano, Date.valueOf(LocalDate.now()));
+            daoP.insertPartida(partida);
             
             menu.estaActivo(true);
         }

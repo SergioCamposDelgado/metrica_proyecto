@@ -18,8 +18,10 @@ public class App {
         
         lista.forEach(System.out::println);
         
+        new DAOUsuario().insertUsuario(new Usuario("sergioscd", "123", "Sergio", 200.0, false));
+        
         Usuario u = new DAOUsuario().getUsuario("sergioscd");
-        u.setBalance(10.0);
+        u.setBalance(230.0);
         new DAOUsuario().setBalance(u);
     }
 

@@ -8,60 +8,53 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-
 /**
  *
  * @author Sergio Campos Delgado
  */
 public class MenuUser extends javax.swing.JFrame {
+
     private Usuario usuario;
-        private static BufferedImage fondoMenu;
+    private static BufferedImage fondoMenu;
 
-
-        static {
-            BufferedImage fondoMenu = null;
-            try {
-                fondoMenu = ImageIO.read(new File("fondoMenu.png"));
-            } catch (IOException e) {
-                System.out.println("MenuUser: ");
-                e.printStackTrace();
-            }
-            MenuUser.fondoMenu = fondoMenu;
+    static {
+        BufferedImage fondoMenu = null;
+        try {
+            fondoMenu = ImageIO.read(new File("fondoMenu.png"));
+        } catch (IOException e) {
+            System.out.println("MenuUser: ");
+            e.printStackTrace();
         }
+        MenuUser.fondoMenu = fondoMenu;
+    }
+
     public MenuUser(Usuario usuario) {
         this.usuario = usuario;
         initComponents();
 
         fondoMenuLabel.setIcon(new ImageIcon(MenuUser.getFondoMenu()));
-        
-        infoUserName.setText(
-        usuario.getName()
-                
-        );
-        
-        infoCredito.setText(
-        "Crédito:  " + usuario.getBalance() 
-        
-        );
-        
-        
-        
-        
-    }
-    
-    
 
-    public static BufferedImage getFondoMenu () {
+        infoUserName.setText(
+                usuario.getName()
+        );
+
+        infoCredito.setText(
+                "Crédito:  " + usuario.getBalance()
+        );
+
+    }
+
+    public static BufferedImage getFondoMenu() {
         return fondoMenu;
     }
-    
-    public void estaActivo (boolean estaActivo) {
+
+    public void estaActivo(boolean estaActivo) {
         jugar.setEnabled(estaActivo);
         editarInfoUser.setEnabled(estaActivo);
-        
+
         infoCredito.setText("Crédito:  " + usuario.getBalance());
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,12 +175,11 @@ public class MenuUser extends javax.swing.JFrame {
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         //abre el menú de juego
-    Juego abrir = new Juego(usuario, this);
-    abrir.setVisible(true);
-    this.estaActivo(false);
-    
-    }//GEN-LAST:event_jugarActionPerformed
+        Juego abrir = new Juego(usuario, this);
+        abrir.setVisible(true);
+        this.estaActivo(false);
 
+    }//GEN-LAST:event_jugarActionPerformed
 
     /**
      * @param args the command line arguments
