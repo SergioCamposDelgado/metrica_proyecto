@@ -32,7 +32,7 @@ public class Registro extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
-        botonRegistro = new javax.swing.JButton();
+        botonLogin = new javax.swing.JButton();
         labelNombreUsuario = new javax.swing.JLabel();
         textoNombreUsuario = new javax.swing.JTextField();
         labelContraseña = new javax.swing.JLabel();
@@ -47,13 +47,13 @@ public class Registro extends javax.swing.JFrame {
         setTitle("JokerPoker - Login");
         setResizable(false);
 
-        botonRegistro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonRegistro.setText("Si ya tiene una cuenta, pulse aquí");
-        botonRegistro.setToolTipText("");
-        botonRegistro.setActionCommand("¿No esta registrado? Pulse aquí");
-        botonRegistro.addActionListener(new java.awt.event.ActionListener() {
+        botonLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonLogin.setText("Si ya tiene una cuenta, pulse aquí");
+        botonLogin.setToolTipText("");
+        botonLogin.setActionCommand("¿No esta registrado? Pulse aquí");
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegistroActionPerformed(evt);
+                botonLoginActionPerformed(evt);
             }
         });
 
@@ -113,7 +113,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
-                        .addComponent(botonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(350, 350, 350)
                         .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -137,16 +137,20 @@ public class Registro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(botonAceptar)
                 .addGap(18, 18, 18)
-                .addComponent(botonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
-
-    }//GEN-LAST:event_botonRegistroActionPerformed
+    private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
+    //abre el menú de login
+    Login abrir = new Login();
+    abrir.setVisible(true);
+    this.setVisible(false);
+    dispose();
+    }//GEN-LAST:event_botonLoginActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
        String login = textoNombreUsuario.getText();
@@ -160,7 +164,25 @@ public class Registro extends javax.swing.JFrame {
        } else if (login.isBlank()) { //si el nombre de usuario está vacío
           JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
            
-       }
+       } else { 
+           
+           Usuario u = new DAOUsuario().getUsuario(login);
+           if (u == null) { //si el nombre de usuario introducido no existe
+               
+           u = new Usuario(login, passwd, nombre, Usuario.getInitialBalance(), false);
+           new DAOUsuario().insertUsuario(u);
+           Login abrir = new Login();
+           abrir.setVisible(true);
+           this.setVisible(false);
+           dispose();
+               
+           } else { //si el nombre de usuario introducido ya existe
+               
+           JOptionPane.showMessageDialog(this, "El nombre de usuario introducido ya existe.", "Error", JOptionPane.ERROR_MESSAGE);    
+               
+           }
+           
+       } 
        
        
        
@@ -222,7 +244,7 @@ public class Registro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
-    private javax.swing.JButton botonRegistro;
+    private javax.swing.JButton botonLogin;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelContraseña;

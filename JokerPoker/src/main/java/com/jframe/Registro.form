@@ -68,7 +68,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
-                      <Component id="botonRegistro" min="-2" pref="374" max="-2" attributes="0"/>
+                      <Component id="botonLogin" min="-2" pref="374" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
@@ -100,14 +100,14 @@
               <EmptySpace pref="157" max="32767" attributes="0"/>
               <Component id="botonAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botonRegistro" min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="botonLogin" min="-2" pref="52" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="botonRegistro">
+    <Component class="javax.swing.JButton" name="botonLogin">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -117,7 +117,7 @@
         <Property name="actionCommand" type="java.lang.String" value="&#xbf;No esta registrado? Pulse aqu&#xed;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegistroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonLoginActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNombreUsuario">
