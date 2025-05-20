@@ -1,11 +1,13 @@
 package com.jframe;
 
+import com.resources.dao.DAOUsuario;
 import com.resources.prog.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -31,11 +33,35 @@ public class MenuUser extends javax.swing.JFrame {
         initComponents();
 
         fondoMenuLabel.setIcon(new ImageIcon(MenuUser.getFondoMenu()));
+        
+        infoUserName.setText(
+        usuario.getName()
+                
+        );
+        
+        infoCredito.setText(
+        "Crédito:  " + usuario.getBalance() 
+        
+        );
+        
+        
+        
+        
     }
+    
+    
 
     public static BufferedImage getFondoMenu () {
         return fondoMenu;
     }
+    
+    public void estaActivo (boolean estaActivo) {
+        jugar.setEnabled(estaActivo);
+        editarInfoUser.setEnabled(estaActivo);
+        
+        infoCredito.setText("Crédito:  " + usuario.getBalance());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +76,10 @@ public class MenuUser extends javax.swing.JFrame {
         fondoMenuLabel = new javax.swing.JLabel();
         salida = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
+        jugar = new javax.swing.JButton();
+        editarInfoUser = new javax.swing.JButton();
+        infoUserName = new javax.swing.JLabel();
+        infoCredito = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -84,10 +114,49 @@ public class MenuUser extends javax.swing.JFrame {
 
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         titulo.setForeground(new java.awt.Color(204, 204, 204));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Joker Poker  - Menu");
         jLayeredPane1.setLayer(titulo, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(titulo);
-        titulo.setBounds(40, 20, 790, 80);
+        titulo.setBounds(0, 100, 1020, 80);
+
+        jugar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jugar.setText("Jugar");
+        jugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(jugar, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(jugar);
+        jugar.setBounds(330, 330, 380, 30);
+
+        editarInfoUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editarInfoUser.setText("Editar información");
+        editarInfoUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarInfoUserActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(editarInfoUser, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(editarInfoUser);
+        editarInfoUser.setBounds(330, 420, 380, 30);
+
+        infoUserName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        infoUserName.setForeground(new java.awt.Color(204, 204, 204));
+        infoUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoUserName.setText("infoUserName");
+        jLayeredPane1.setLayer(infoUserName, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(infoUserName);
+        infoUserName.setBounds(70, 330, 200, 30);
+
+        infoCredito.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        infoCredito.setForeground(new java.awt.Color(204, 204, 204));
+        infoCredito.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoCredito.setText("infoCredito");
+        jLayeredPane1.setLayer(infoCredito, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(infoCredito);
+        infoCredito.setBounds(70, 420, 200, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,6 +175,18 @@ public class MenuUser extends javax.swing.JFrame {
     private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
         dispose();
     }//GEN-LAST:event_salidaMouseClicked
+
+    private void editarInfoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInfoUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarInfoUserActionPerformed
+
+    private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
+        //abre el menú de juego
+    Juego abrir = new Juego(usuario, this);
+    abrir.setVisible(true);
+    this.estaActivo(false);
+    
+    }//GEN-LAST:event_jugarActionPerformed
 
 
     /**
@@ -145,15 +226,19 @@ public class MenuUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuUser(new Usuario("sergioscd", "123", "Sergio", 200.00, false)).setVisible(true);
+                new MenuUser(new DAOUsuario().getUsuario("sergioscd")).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editarInfoUser;
     private javax.swing.JLabel fondoMenuLabel;
+    private javax.swing.JLabel infoCredito;
+    private javax.swing.JLabel infoUserName;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JButton jugar;
     private javax.swing.JLabel salida;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables

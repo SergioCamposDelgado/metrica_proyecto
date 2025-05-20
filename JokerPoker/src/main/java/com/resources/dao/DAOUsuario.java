@@ -70,7 +70,7 @@ public class DAOUsuario {
             pst.setString(3, u.getName());
             pst.setDouble(4, u.getBalance());
             pst.setBoolean(5, u.esAdmin());
-            ResultSet rs = pst.executeQuery();
+            pst.execute();
 
         } catch (SQLException e) {
             System.err.println("DAOUsuario, insertUsuario:" + e.getMessage());
