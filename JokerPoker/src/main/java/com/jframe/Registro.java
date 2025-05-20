@@ -153,15 +153,15 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_botonLoginActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-       String login = textoNombreUsuario.getText();
-       String nombre = textoNombreUsuarioName.getText();
-       String passwd = textoContraseña.getText();
+       String login = textoNombreUsuario.getText().trim();
+       String nombre = textoNombreUsuarioName.getText().trim();
+       String passwd = textoContraseña.getText().trim();
       
-       if (nombre.isBlank()) { //si el nombre del usuario está vacío
+       if (nombre.isBlank() || nombre.length()>24) { //si el nombre del usuario está vacío o es demasiado largo
           JOptionPane.showMessageDialog(this, "Debe introducir un nombre válido.", "Error", JOptionPane.ERROR_MESSAGE);
-       } else if (passwd.isBlank()) { //si la contraseña está vacía
+       } else if (passwd.isBlank() || passwd.length()>24) { //si la contraseña está vacía o es demasiado larga
           JOptionPane.showMessageDialog(this, "Debe introducir una contraseña válida.", "Error", JOptionPane.ERROR_MESSAGE);
-       } else if (login.isBlank()) { //si el nombre de usuario está vacío
+       } else if (login.isBlank() || login.length()>24) { //si el nombre de usuario está vacío o es demasiado largo
           JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
            
        } else { 

@@ -143,9 +143,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
-        String login = textoNombreUsuario.getText();
-        String passwd = textoContraseña.getText();
-        if (login.isBlank()) { //Si el nombre está vacío
+        String login = textoNombreUsuario.getText().trim();
+        String passwd = textoContraseña.getText().trim();
+        if (login.isBlank()) { //Si el nombre está vacío 
             JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (passwd.isBlank()) { //Si la contraseña está vacía
             JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);

@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author Sergio Campos Delgado
  */
-public class Usuario {
+public class Usuario implements Comparable <Usuario>{
 
     protected String userName;
     protected String passwd;
@@ -57,15 +57,42 @@ public class Usuario {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        if (userName.length()<25){
+           this.userName = userName; 
+            
+            
+        } else {
+            
+            throw new IllegalArgumentException("Usuario, setUsername, El nombre es demasiado largo.");
+            
+        }
     }
 
     public void setPasswd(String passwd) {
-        this.passwd = passwd;
+         if (passwd.length()<25){
+           this.passwd = passwd; 
+            
+            
+        } else {
+            
+            throw new IllegalArgumentException("Usuario, setPasswd, La contraseña es demasiado largo.");
+            
+        }
+        
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name.length()<25){
+           this.name = name; 
+            
+            
+        } else {
+            
+            throw new IllegalArgumentException("Usuario, setName, El nombre es demasiado largo.");
+            
+        }
+        
+        
     }
 
     public void setBalance(double balance) {
@@ -78,8 +105,12 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return name + "\t" + balance;
+        return userName + "\t" + name + "\t" + balance + "\t" + esAdmin;
     }
+
+    public int compareTo(Usuario o) {
+        return this.getUserName().compareTo(o.getUserName());
+   }
 
     public class ComparadorNombre implements Comparator<Usuario> {
 

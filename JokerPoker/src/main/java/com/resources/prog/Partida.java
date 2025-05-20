@@ -14,7 +14,7 @@ import java.util.Comparator;
  *
  * @author Sergio Campos Delgado
  */
-public class Partida {
+public class Partida implements Comparable <Partida> {
 
     protected int id;
     protected Usuario user;
@@ -74,6 +74,10 @@ public class Partida {
         s+= userWins + " ";
         s+= date;
         return s;
+    }
+
+    public int compareTo(Partida o) {
+        return this.getId()-o.getId();
     }
     
      public class ComparadorID implements Comparator<Partida> {
