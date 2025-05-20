@@ -3,9 +3,9 @@
  Clase Usuario.
 
  */
-
-
 package com.resources.prog;
+
+import java.util.Comparator;
 
 /**
  *
@@ -80,5 +80,32 @@ public class Usuario {
     public String toString() {
         return name + "\t" + balance;
     }
+
+    public class ComparadorNombre implements Comparator<Usuario> {
+
+        public int compare(Usuario u1, Usuario u2) {
+            return u1.getName().compareTo(u2.getName());
+        }
+
+    }
+    
+    public class ComparadorUserName implements Comparator<Usuario> {
+
+        public int compare(Usuario u1, Usuario u2) {
+            return u1.getUserName().compareTo(u2.getUserName());
+        }
+
+    }
+    
+    public class ComparadorBalance implements Comparator<Usuario> {
+
+        public int compare(Usuario u1, Usuario u2) {
+            return Double.compare(u1.balance, u2.balance);
+        }
+
+    }
+    
+    
+    
 
 }

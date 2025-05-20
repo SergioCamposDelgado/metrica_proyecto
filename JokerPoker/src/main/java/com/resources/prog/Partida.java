@@ -8,6 +8,7 @@ package com.resources.prog;
 import com.resources.dao.DAOPartida;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
 
 /**
  *
@@ -74,5 +75,21 @@ public class Partida {
         s+= date;
         return s;
     }
+    
+     public class ComparadorID implements Comparator<Partida> {
+
+        public int compare(Partida p1, Partida p2) {
+            return Integer.compare(p1.getId(), p2.getId());
+        }
+    }
+     
+    public class ComparadorDate implements Comparator<Partida> {
+
+        public int compare(Partida p1, Partida p2) {
+            return p1.getDate().compareTo(p2.getDate());
+        }
+    }
+     
+     
 
 }
