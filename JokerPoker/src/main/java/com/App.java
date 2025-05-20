@@ -1,12 +1,49 @@
 package com;
 
+import com.resources.dao.DAOPartida;
 import java.util.List;
 import com.resources.prog.Baraja;
 import com.resources.prog.Carta;
+import com.resources.prog.Partida;
+import com.resources.prog.Usuario;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class App {
 
     public static void main(String[] args) {
+
+        List<Partida> lista = new DAOPartida().getPartidas();
+        
+        lista.forEach(System.out::println);
+    }
+
+    public static void probar(String titulo, List<Carta> mano1, List<Carta> mano2) {
+        System.out.println("=== " + titulo + " ===");
+
+        System.out.println("Mano 1:");
+        mano1.forEach(System.out::println);
+        int v1 = Baraja.evaluarMano(mano1);
+        System.out.println("Valor: " + v1 + " (" + Baraja.descripcionMano(v1) + ")\n");
+
+        System.out.println("Mano 2:");
+        mano2.forEach(System.out::println);
+        int v2 = Baraja.evaluarMano(mano2);
+        System.out.println("Valor: " + v2 + " (" + Baraja.descripcionMano(v2) + ")\n");
+
+        int cmp = Baraja.compararManos(mano1, mano2);
+        if (cmp < 0) {
+            System.out.println("Gana Mano 1\n");
+        } else if (cmp > 0) {
+            System.out.println("Gana Mano 2\n");
+        } else {
+            System.out.println("Empate\n");
+        }
+
+        System.out.println();
+    }
+
+    public void probarPartidas() {
 
         probar("Par bajo vs Par alto",
                 List.of(
@@ -260,30 +297,5 @@ public class App {
                         new Carta(3, 3) // 5
                 )
         );
-    }
-
-    public static void probar(String titulo, List<Carta> mano1, List<Carta> mano2) {
-        System.out.println("=== " + titulo + " ===");
-
-        System.out.println("Mano 1:");
-        mano1.forEach(System.out::println);
-        int v1 = Baraja.evaluarMano(mano1);
-        System.out.println("Valor: " + v1 + " (" + Baraja.descripcionMano(v1) + ")\n");
-
-        System.out.println("Mano 2:");
-        mano2.forEach(System.out::println);
-        int v2 = Baraja.evaluarMano(mano2);
-        System.out.println("Valor: " + v2 + " (" + Baraja.descripcionMano(v2) + ")\n");
-
-        int cmp = Baraja.compararManos(mano1, mano2);
-        if (cmp < 0) {
-            System.out.println("Gana Mano 1\n");
-        } else if (cmp > 0) {
-            System.out.println("Gana Mano 2\n");
-        } else {
-            System.out.println("Empate\n");
-        }
-
-        System.out.println();
     }
 }

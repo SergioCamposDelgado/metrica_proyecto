@@ -5,13 +5,16 @@
  */
 package com.resources.prog;
 
+import com.resources.dao.DAOPartida;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author Sergio Campos Delgado
  */
 public class Partida {
+
     protected int id;
     protected Usuario user;
     protected boolean userWins;
@@ -22,6 +25,13 @@ public class Partida {
         this.user = user;
         this.userWins = userWins;
         this.date = date;
+    }
+
+    public Partida(Usuario user, boolean userWins) {
+        this.id = new DAOPartida().getMaxID() + 1;
+        this.user = user;
+        this.userWins = userWins;
+        this.date = Date.valueOf(LocalDate.now());
     }
 
     public int getId() {
@@ -55,7 +65,14 @@ public class Partida {
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    public String toString() {
+        String s = "";
+        s+= id +" ";
+        s+= user.getUserName() +" ";
+        s+= userWins + " ";
+        s+= date;
+        return s;
+    }
 
-    
-    
 }
