@@ -1,6 +1,7 @@
 package com;
 
 import com.resources.dao.DAOPartida;
+import com.resources.dao.DAOUsuario;
 import java.util.List;
 import com.resources.prog.Baraja;
 import com.resources.prog.Carta;
@@ -16,6 +17,10 @@ public class App {
         List<Partida> lista = new DAOPartida().getPartidas();
         
         lista.forEach(System.out::println);
+        
+        Usuario u = new DAOUsuario().getUsuario("sergioscd");
+        u.setBalance(10.0);
+        new DAOUsuario().setBalance(u);
     }
 
     public static void probar(String titulo, List<Carta> mano1, List<Carta> mano2) {

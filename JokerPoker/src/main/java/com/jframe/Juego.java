@@ -1,5 +1,6 @@
 package com.jframe;
 
+import com.resources.dao.DAOUsuario;
 import com.resources.prog.Baraja;
 import com.resources.prog.Carta;
 import com.resources.prog.Usuario;
@@ -28,10 +29,11 @@ public class Juego extends javax.swing.JFrame {
     private List<Carta> manoJoker;
 
     private Usuario usuario;
+    private MenuUser menu;
     private double bote;
 
-    public Juego(Usuario usuario) {
-
+    public Juego(Usuario usuario, MenuUser menu) {
+        this.menu = menu;
         this.usuario = usuario;
         contadorApuestas = 1;
         initComponents();
@@ -114,6 +116,7 @@ public class Juego extends javax.swing.JFrame {
 
         if (usuario.getBalance() >= 10.00) {
             usuario.setBalance(usuario.getBalance() - 10.00);
+            new DAOUsuario().setBalance(usuario);
             bote = 20.00;
         } else {
             bote = 0.00;
@@ -391,7 +394,9 @@ public class Juego extends javax.swing.JFrame {
             cartasPlayerT.stream().forEach(c -> c.setIcon(null));
             cartasJokerT.stream().forEach(c -> c.setIcon(null));
             apostarBoton.setEnabled(false);
+            rendirseBoton.setEnabled(false);
 
+            menu.estaActivo(true);
             pack();
         }
 
@@ -400,6 +405,7 @@ public class Juego extends javax.swing.JFrame {
     private void apostarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostarBotonActionPerformed
         if (contadorApuestas <= 4 && usuario.getBalance() >= 10.00) {
             usuario.setBalance(usuario.getBalance() - 10.00);
+            new DAOUsuario().setBalance(usuario);
             bote += 20.00;
 
             boteDouble.setText(bote + "");
@@ -412,6 +418,8 @@ public class Juego extends javax.swing.JFrame {
         }
 
         if (contadorApuestas == 4) {
+            apostarBoton.setEnabled(false);
+            rendirseBoton.setEnabled(false);
             contadorApuestas++;
             cartasJokerT.forEach(c -> c.setIcon(null));
             int cmp = Baraja.compararManos(manoPlayer, manoJoker);
@@ -421,6 +429,7 @@ public class Juego extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Has ganado por " + Baraja.descripcionMano(valor), "Has ganado", JOptionPane.INFORMATION_MESSAGE);
                 if (bote != 0.00) {
                     usuario.setBalance(usuario.getBalance() + bote);
+                    new DAOUsuario().setBalance(usuario);
 
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
@@ -438,17 +447,22 @@ public class Juego extends javax.swing.JFrame {
                 if (bote != 0.00) {
                     usuario.setBalance(usuario.getBalance() + (bote / 2.0));
 
+                    new DAOUsuario().setBalance(usuario);
                     boteDouble.setText(0.0 + "");
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
             }
+            
+            menu.estaActivo(true);
         }
 
         pack();
     }//GEN-LAST:event_apostarBotonActionPerformed
 
     private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
-        dispose();
+                new DAOUsuario().setBalance(usuario);
+                menu.estaActivo(true);
+                dispose();
     }//GEN-LAST:event_salidaMouseClicked
 
     /**
@@ -484,7 +498,7 @@ public class Juego extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Juego(new Usuario("sergioscd", "123", "Sergio", 200.00, false)).setVisible(true);
+                new Juego(new DAOUsuario().getUsuario("sergioscd"), null).setVisible(true);
             }
         });
     }
