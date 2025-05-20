@@ -165,12 +165,9 @@ public class Login extends javax.swing.JFrame {
                 MenuUser menu = new MenuUser(u);
                 this.setVisible(false);
                 menu.setVisible(true);
-                    System.out.println("4");
                 dispose();
                     
-                }
-                
-            System.out.println("Usuario:" + u.toString());    
+                }  
                 
             } else {
                 

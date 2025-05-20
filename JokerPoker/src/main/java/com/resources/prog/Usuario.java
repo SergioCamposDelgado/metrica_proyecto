@@ -22,7 +22,7 @@ public class Usuario {
     /**
      * dinero inical por defecto
      */
-    protected static final double initialBalance = 20.00;
+    protected static final double initialBalance = 100.00;
 
     public Usuario(String userName, String passwd, String name, double balance, boolean esAdmin) {
         this.userName = userName;
