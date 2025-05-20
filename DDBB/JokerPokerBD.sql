@@ -22,3 +22,4 @@ CREATE TABLE Partidas (
     );
 
 INSERT INTO usuarios (userName, passwd, name, balance, esAdmin) VALUE ('admin', 'admin', 'administrador', 99999.99, true);
+INSERT INTO partidas (id, userWins, fecha, userName) VALUES ('-1', '1', '2025-05-01', 'admin');
