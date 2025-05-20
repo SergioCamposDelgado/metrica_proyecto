@@ -135,11 +135,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
-    //abre el menú de registro
-    Registro abrir = new Registro();
-    abrir.setVisible(true);
-    this.setVisible(false);
-    dispose();
+        //abre el menú de registro
+        Registro abrir = new Registro();
+        abrir.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
@@ -156,27 +156,23 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (passwd.equals(u.getPasswd())) {//Si la contraseña introducida no es correcta 
                 if (u.esAdmin()) { //Si el usuario es admin
-                    
-                    
-                    
+                    MenuAdmin menu = new MenuAdmin(u);
+                    this.setVisible(false);
+                    menu.setVisible(true);
+                    dispose();
                 } else {
-                    
-                    
-                MenuUser menu = new MenuUser(u);
-                this.setVisible(false);
-                menu.setVisible(true);
-                dispose();
-                    
-                }  
-                
+                    MenuUser menu = new MenuUser(u);
+                    this.setVisible(false);
+                    menu.setVisible(true);
+                    dispose();
+                }
+
             } else {
-                
-            JOptionPane.showMessageDialog(this, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);   
-                
+
+                JOptionPane.showMessageDialog(this, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+
             }
-            
-        
-               
+
         }
 
     }//GEN-LAST:event_botonLoginActionPerformed
