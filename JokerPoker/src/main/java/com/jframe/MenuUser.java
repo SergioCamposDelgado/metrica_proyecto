@@ -53,6 +53,7 @@ public class MenuUser extends javax.swing.JFrame {
         editarInfoUser.setEnabled(estaActivo);
 
         infoCredito.setText("Crédito:  " + usuario.getBalance());
+        infoUserName.setText(usuario.getName());
     }
 
     /**
@@ -166,11 +167,14 @@ public class MenuUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_salidaMouseClicked
 
     private void editarInfoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInfoUserActionPerformed
-        // TODO add your handling code here:
+        //abre el menú de modinfouser
+        ModInfoUser abrir = new ModInfoUser(usuario, this);
+        abrir.setVisible(true);
+        this.estaActivo(false);
     }//GEN-LAST:event_editarInfoUserActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed

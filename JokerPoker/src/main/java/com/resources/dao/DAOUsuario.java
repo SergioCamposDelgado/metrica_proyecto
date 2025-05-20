@@ -147,10 +147,10 @@ public class DAOUsuario {
             conn = conectarBD();
             PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET passwd = ?, name = ?, balance = ?, esAdmin = ? WHERE username = ?");
             pst.setString(1, u.getPasswd());
-            pst.setString(1, u.getName());
-            pst.setDouble(1, u.getBalance());
-            pst.setBoolean(1, u.esAdmin());
-            pst.setString(1, u.getUserName());
+            pst.setString(2, u.getName());
+            pst.setDouble(3, u.getBalance());
+            pst.setBoolean(4, u.esAdmin());
+            pst.setString(5, u.getUserName());
             pst.execute();
 
         } catch (SQLException e) {

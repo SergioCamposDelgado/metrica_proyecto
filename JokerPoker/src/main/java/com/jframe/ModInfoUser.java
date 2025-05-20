@@ -10,11 +10,25 @@ import javax.swing.JOptionPane;
  */
 public class ModInfoUser extends javax.swing.JFrame {
 
+    private Usuario user;
+    private MenuUser menu;
+
     /**
      * Creates new form jLogin
      */
-    public ModInfoUser() {
+    public ModInfoUser(Usuario user, MenuUser menu) {
+        this.user = user;
+        this.menu = menu;
         initComponents();
+        textoNombre.setText(user.getName());
+
+    }
+
+    private void actualizarInfo() {
+        new DAOUsuario().updateInfo(user);
+        menu.estaActivo(true);
+        dispose();
+
     }
 
     /**
@@ -29,15 +43,16 @@ public class ModInfoUser extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         cabecera = new javax.swing.JLabel();
-        labelNombreUsuario = new javax.swing.JLabel();
-        textoNombreUsuario = new javax.swing.JTextField();
+        labelNombre = new javax.swing.JLabel();
+        textoNombre = new javax.swing.JTextField();
         labelContraseña = new javax.swing.JLabel();
         textoContraseña = new javax.swing.JPasswordField();
         botonLogin = new javax.swing.JButton();
+        botonCancelarCambios = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("JokerPoker - Modificar Info");
         setResizable(false);
 
@@ -45,23 +60,25 @@ public class ModInfoUser extends javax.swing.JFrame {
         cabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cabecera.setText("Modificar Info");
 
-        labelNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelNombreUsuario.setText("Nombre:");
-
-        textoNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreUsuarioActionPerformed(evt);
-            }
-        });
+        labelNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelNombre.setText("Nombre:");
 
         labelContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelContraseña.setText("Contraseña:");
 
         botonLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonLogin.setText("Modificar");
+        botonLogin.setText("Aceptar");
         botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonLoginActionPerformed(evt);
+            }
+        });
+
+        botonCancelarCambios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonCancelarCambios.setText("Cancelar");
+        botonCancelarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarCambiosActionPerformed(evt);
             }
         });
 
@@ -70,23 +87,26 @@ public class ModInfoUser extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelContraseña)
-                    .addComponent(labelNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelContraseña)
+                            .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botonCancelarCambios)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonLogin)
+                            .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 137, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(341, 341, 341)
-                .addComponent(botonLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cabecera, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                 .addContainerGap())
@@ -98,65 +118,49 @@ public class ModInfoUser extends javax.swing.JFrame {
                 .addComponent(cabecera)
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelNombreUsuario))
+                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombre))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelContraseña)
                     .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(botonLogin)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonLogin)
+                    .addComponent(botonCancelarCambios))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
-        String login = textoNombreUsuario.getText();
+        String nombre = textoNombre.getText();
         String passwd = textoContraseña.getText();
-        if (login.isBlank()) { //Si el nombre está vacío
-            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        if (nombre.isBlank() && passwd.isBlank()) { //Si el nombre y la contraseña están vacíos
+            JOptionPane.showMessageDialog(this, "Ambos campos no pueden estar vacíos", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (passwd.isBlank()) { //Si la contraseña está vacía
-            JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+            user.setName(nombre);
+            actualizarInfo();
+        } else if (nombre.isBlank()) {//si el nombre está vacío
+            user.setPasswd(passwd);
+            actualizarInfo();
 
-            Usuario u = new DAOUsuario().getUsuario(login);
-            if (u == null) {
-                JOptionPane.showMessageDialog(this, "El usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (passwd.equals(u.getPasswd())) {//Si la contraseña introducida no es correcta 
-                if (u.esAdmin()) { //Si el usuario es admin
-                    
-                    
-                    
-                } else {
-                    
-                    
-                MenuUser menu = new MenuUser(u);
-                this.setVisible(false);
-                menu.setVisible(true);
-                    System.out.println("4");
-                dispose();
-                    
-                }
-                
-            System.out.println("Usuario:" + u.toString());    
-                
-            } else {
-                
-            JOptionPane.showMessageDialog(this, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);   
-                
-            }
-            
-        
-               
+        } else {//si ambos están rellenos, cambia ambos
+
+            user.setName(nombre);
+            user.setPasswd(passwd);
+            actualizarInfo();
+
         }
+
 
     }//GEN-LAST:event_botonLoginActionPerformed
 
-    private void textoNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreUsuarioActionPerformed
+    private void botonCancelarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarCambiosActionPerformed
+        menu.estaActivo(true);
+        dispose();
+    }//GEN-LAST:event_botonCancelarCambiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,16 +176,24 @@ public class ModInfoUser extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModInfoUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModInfoUser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModInfoUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModInfoUser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModInfoUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModInfoUser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModInfoUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModInfoUser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -191,19 +203,20 @@ public class ModInfoUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModInfoUser().setVisible(true);
+                new ModInfoUser(new DAOUsuario().getUsuario("sergioscd"), null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCancelarCambios;
     private javax.swing.JButton botonLogin;
     private javax.swing.JLabel cabecera;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelContraseña;
-    private javax.swing.JLabel labelNombreUsuario;
+    private javax.swing.JLabel labelNombre;
     private javax.swing.JPasswordField textoContraseña;
-    private javax.swing.JTextField textoNombreUsuario;
+    private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
 }
