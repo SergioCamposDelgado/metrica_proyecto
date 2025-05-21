@@ -1,13 +1,8 @@
 package com.resources.prog;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.resources.dao.DAOPartida;
-
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -15,15 +10,11 @@ class PartidaTest {
 
     private Usuario usuario;
     private Partida partida;
-    private DAOPartida daoPartidaMock;
 
     @BeforeEach
     void setUp() {
-        daoPartidaMock = mock(DAOPartida.class);
-        when(daoPartidaMock.getMaxID()).thenReturn(10);  // Supongamos que el ID máximo es 10 para las pruebas.
-
-        usuario = new Usuario("user1", "password123", "John Doe", 100.0, false);
-        partida = new Partida(1, usuario, true, Date.valueOf(LocalDate.of(2025, 5, 21)));  // Partida con id 1
+        usuario = new Usuario("user1", "password123", "John Doe", 100.0, false); // Creación de un Usuario
+        partida = new Partida(1, usuario, true, Date.valueOf(LocalDate.of(2025, 5, 21))); // Creación de la Partida
     }
 
     @Test
@@ -96,5 +87,24 @@ class PartidaTest {
         assertTrue(comparador.compare(p1, p2) > 0);  // p1 > p2 (p1 es más reciente)
         assertTrue(comparador.compare(p2, p1) < 0);  // p2 < p1
         assertEquals(0, comparador.compare(p1, p1));  // p1 == p1
+    }
+
+    // Test adicional para validar las excepciones en los métodos del Usuario (si es necesario)
+    @Test
+    void testUsuarioExcepciones() {
+        // Excepción cuando el nombre de usuario es demasiado largo
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Usuario("userWithVeryLongNameThatExceedsLimit", "password123", "John Doe", 100.0, false);
+        });
+
+        // Excepción cuando la contraseña es demasiado larga
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Usuario("user1", "passwordWithVeryLongNameThatExceedsLimit", "John Doe", 100.0, false);
+        });
+
+        // Excepción cuando el nombre es demasiado largo
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Usuario("user1", "password123", "VeryLongNameThatExceedsLimit", 100.0, false);
+        });
     }
 }
