@@ -79,7 +79,7 @@ class UsuarioTest {
         Usuario usuario3 = new Usuario("user3", "password789", "Bob", 100.0, false);
 
         Usuario.ComparadorUserName comparador = new Usuario.ComparadorUserName();
- 
+
         // Comparar por nombre de usuario
         assertTrue(comparador.compare(usuario, usuario2) < 0); // "user1" < "user2"
         assertTrue(comparador.compare(usuario2, usuario3) < 0); // "user2" < "user3"
@@ -91,7 +91,7 @@ class UsuarioTest {
         // Crear usuarios con balances diferentes
         Usuario usuario2 = new Usuario("user2", "password456", "Alice", 50.0, false);
         Usuario usuario3 = new Usuario("user3", "password789", "Bob", 150.0, false);
-        
+
         // El balance del usuario es 100.0
         Usuario usuario = new Usuario("user1", "password123", "John Doe", 100.0, false);
 

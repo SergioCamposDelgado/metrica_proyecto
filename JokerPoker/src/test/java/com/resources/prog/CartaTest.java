@@ -45,7 +45,6 @@ class CartaTest {
         }
     }
 
-
     @Test
     void testGetPaloInt() {
         for (int i = 0; i < Carta.palos.length; i++) {
@@ -77,7 +76,7 @@ class CartaTest {
         List<Carta> cartas = Arrays.asList(
                 new Carta(0, 5), // 7
                 new Carta(0, 11), // K
-                new Carta(0, 2)  // 4
+                new Carta(0, 2) // 4
         );
 
         cartas.sort(new Carta.ComparadorPorNumero());
@@ -93,7 +92,7 @@ class CartaTest {
                 new Carta(3, 5), // 7 DIAMONDS
                 new Carta(2, 6), // 8 CLUBS
                 new Carta(0, 7), // 9 SPADES
-                new Carta(1, 8)  // 10 HEARTS
+                new Carta(1, 8) // 10 HEARTS
         );
 
         cartas.sort(new Carta.ComparadorPorPalo());
@@ -112,6 +111,7 @@ class CartaTest {
     }
 
     static class CartaFalsa extends Carta {
+
         public CartaFalsa() {
             super(0, 0);
             this.palo = "INVENTADO";
@@ -123,8 +123,9 @@ class CartaTest {
         Carta carta = new CartaFalsa();
         assertEquals(-1, carta.getPaloInt());
     }
-    
+
     static class CartaFalsaNumero extends Carta {
+
         public CartaFalsaNumero() {
             super(0, 0);
             this.numero = "Ñ";
@@ -133,9 +134,8 @@ class CartaTest {
 
     @Test
     void testNumeroInvalidoGetNumeroInt() {
-    	Carta carta = new CartaFalsaNumero();
-    	assertEquals(-1, carta.getNumeroInt());
+        Carta carta = new CartaFalsaNumero();
+        assertEquals(-1, carta.getNumeroInt());
     }
-
 
 }

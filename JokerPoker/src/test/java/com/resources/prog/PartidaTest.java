@@ -37,12 +37,12 @@ class PartidaTest {
     @Test
     void testGettersYSetters() {
         Partida p = new Partida(1, usuario, false, Date.valueOf(LocalDate.of(2023, 1, 1)));
-        
+
         p.setId(2);
         p.setUser(new Usuario("user2", "password456", "Jane Doe", 50.0, true));  // Cambio de Usuario
         p.setUserWins(true);  // El usuario ahora ha ganado
         p.setDate(Date.valueOf(LocalDate.of(2025, 5, 21)));  // Cambiar la fecha
-        
+
         assertEquals(2, p.getId());
         assertEquals("user2", p.getUser().getUserName());  // Verificación del nuevo Usuario
         assertTrue(p.isUserWins());
@@ -59,7 +59,7 @@ class PartidaTest {
     void testCompareTo() {
         Partida p1 = new Partida(1, usuario, true, Date.valueOf(LocalDate.of(2025, 5, 21)));
         Partida p2 = new Partida(2, usuario, false, Date.valueOf(LocalDate.of(2025, 5, 21)));
-        
+
         assertTrue(p1.compareTo(p2) < 0);  // p1 < p2
         assertTrue(p2.compareTo(p1) > 0);  // p2 > p1
         assertEquals(0, p1.compareTo(p1));  // p1 == p1
@@ -69,9 +69,9 @@ class PartidaTest {
     void testComparadorID() {
         Partida p1 = new Partida(1, usuario, true, Date.valueOf(LocalDate.of(2025, 5, 21)));
         Partida p2 = new Partida(2, usuario, false, Date.valueOf(LocalDate.of(2025, 5, 21)));
-        
+
         Partida.ComparadorID comparador = new Partida.ComparadorID();
-        
+
         assertTrue(comparador.compare(p1, p2) < 0);  // p1 < p2
         assertTrue(comparador.compare(p2, p1) > 0);  // p2 > p1
         assertEquals(0, comparador.compare(p1, p1));  // p1 == p1
@@ -81,9 +81,9 @@ class PartidaTest {
     void testComparadorDate() {
         Partida p1 = new Partida(1, usuario, true, Date.valueOf(LocalDate.of(2025, 5, 21)));
         Partida p2 = new Partida(2, usuario, false, Date.valueOf(LocalDate.of(2024, 5, 21)));
-        
+
         Partida.ComparadorDate comparador = new Partida.ComparadorDate();
-        
+
         assertTrue(comparador.compare(p1, p2) > 0);  // p1 > p2 (p1 es más reciente)
         assertTrue(comparador.compare(p2, p1) < 0);  // p2 < p1
         assertEquals(0, comparador.compare(p1, p1));  // p1 == p1

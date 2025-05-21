@@ -20,7 +20,6 @@ class BarajaTest {
     // ----------------------
     // Test de creación y reparto
     // ----------------------
-
     @Test
     void testBarajaContiene52Cartas() {
         List<Carta> mano = baraja.repartirMano(52);
@@ -54,7 +53,6 @@ class BarajaTest {
     // ----------------------
     // Test de evaluarMano
     // ----------------------
-
     @Test
     void testEvaluarMano_CartaAlta() {
         List<Carta> mano = List.of(
@@ -179,7 +177,6 @@ class BarajaTest {
     // ----------------------
     // Test de descripcionMano
     // ----------------------
-
     @Test
     void testDescripcionManoTodosLosCasos() {
         assertEquals("Escalera de color", Baraja.descripcionMano(10));
@@ -199,7 +196,6 @@ class BarajaTest {
     // ----------------------
     // Test de compararManos
     // ----------------------
-
     @Test
     void testCompararManos_ValorDiferente() {
         List<Carta> mano1 = List.of(new Carta(0, 0), new Carta(1, 1), new Carta(2, 2), new Carta(3, 3), new Carta(0, 12)); // escalera baja

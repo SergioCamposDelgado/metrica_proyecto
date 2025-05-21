@@ -26,7 +26,7 @@ public class DAOPartida {
 
     public Connection conectarBD() throws SQLException {
         Connection conn = DriverManager.getConnection(url, usuario, contraseña);
-        System.out.println("¡Conexión exitosa a MariaDB! DAOPartida");
+        System.out.println("Conexion exitosa a MariaDB! DAOPartida");
         return conn;
 
     }
@@ -49,7 +49,7 @@ public class DAOPartida {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                p = new Partida(rs.getInt("id"), new DAOUsuario().getUsuario(rs.getString("user")), rs.getBoolean("userWins"), rs.getDate("date"));
+                p = new Partida(rs.getInt("id"), new DAOUsuario().getUsuario(rs.getString("userName")), rs.getBoolean("userWins"), rs.getDate("fecha"));
             }
         } catch (SQLException e) {
             System.err.println("DAOPartida, getPartida:" + e.getMessage());
