@@ -26,7 +26,7 @@ public class DAOUsuario {
 
     public Connection conectarBD() throws SQLException {
         Connection conn = DriverManager.getConnection(url, usuario, contraseña);
-        System.out.println("¡Conexión exitosa a MariaDB! DAOUsuario");
+        System.out.println("Conexion exitosa a MariaDB! DAOUsuario");
         return conn;
     }
 
@@ -142,7 +142,8 @@ public class DAOUsuario {
 
         return lista;
     }
-        public void updateInfo(Usuario u) {
+
+    public void updateInfo(Usuario u) {
         Connection conn = null;
         try {
             conn = conectarBD();
@@ -161,6 +162,5 @@ public class DAOUsuario {
         }
 
     }
-    
 
 }
