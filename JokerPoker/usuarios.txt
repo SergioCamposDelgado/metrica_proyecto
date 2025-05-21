@@ -1,0 +1,7 @@
+USERNAME 	NOMBRE 	CREDITO 	TIPO
+admin 	Administrador 	99839.99 	admin
+joselito 	Jose 	100.0 	usuario
+juanillo 	Juan 	200.2 	admin
+paco 	Paco 	-20.0 	usuario
+sergioscd 	Sergio2 	270.0 	usuario
+JOKERPOKER DATABASE - NO DISTRIBUIR A TERCEROS

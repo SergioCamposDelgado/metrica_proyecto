@@ -2,12 +2,15 @@ package com.jframe;
 
 import com.resources.dao.DAOUsuario;
 import com.resources.prog.Usuario;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.rmi.AccessException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,7 +31,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
     public ModInfoAdmin(Usuario admin, MenuAdmin menu) {
         if (admin.esAdmin()) {
             initComponents();
-            cargarEventos();
+            cargarUsuarios();
             setLocationRelativeTo(null);
         } else {
             this.setEnabled(false);
@@ -36,7 +39,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         }
         this.admin = admin;
         this.menu = menu;
-        cancelarDialogoBalance();
+        cancelarDialogo(dialogBalance);
 
     }
 
@@ -46,7 +49,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         dispose();
     }
 
-    public void cargarEventos() {
+    public void cargarUsuarios() {
         listaUsuarios = new DAOUsuario().getUsuarios();
         DefaultListModel<Usuario> modeloListaEventos = new DefaultListModel();
         listaUsuarios.sort(null);
@@ -54,7 +57,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         jListaUsuarios.setModel(modeloListaEventos);
     }
 
-    public void OrdenarEventos(Comparator<Usuario> comparador) {
+    public void OrdenarUsuarios(Comparator<Usuario> comparador) {
         DefaultListModel<Usuario> modeloListaEventos = new DefaultListModel();
         listaUsuarios.sort(comparador);
         modeloListaEventos.addAll(listaUsuarios);
@@ -73,28 +76,39 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         dialogBalance = new javax.swing.JDialog();
-        subit = new javax.swing.JButton();
+        subir = new javax.swing.JButton();
         texto = new javax.swing.JTextField();
         cancelar = new javax.swing.JButton();
         tituloDialog = new javax.swing.JLabel();
+        dialogRegistro = new javax.swing.JDialog();
+        registrar = new javax.swing.JButton();
+        cancelarRegistro = new javax.swing.JButton();
+        tituloRegistro = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        passwdLabel = new javax.swing.JLabel();
+        userNameLabel = new javax.swing.JLabel();
+        userNameText = new javax.swing.JTextField();
+        passwdText = new javax.swing.JPasswordField();
         cabecera = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListaUsuarios = new javax.swing.JList<>();
         setAdminUsuario = new javax.swing.JButton();
         editarCreditoUsuario = new javax.swing.JButton();
         registrarUsuario = new javax.swing.JButton();
-        salir = new javax.swing.JButton();
+        descargarTXT = new javax.swing.JButton();
         ordenarLista = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         JListaOrdenaciones = new javax.swing.JList<>();
+        salida = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
-        subit.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        subit.setText("Modificar");
-        subit.addActionListener(new java.awt.event.ActionListener() {
+        subir.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        subir.setText("Modificar");
+        subir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subitActionPerformed(evt);
+                subirActionPerformed(evt);
             }
         });
 
@@ -128,7 +142,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(cancelar)
                 .addGap(55, 55, 55)
-                .addComponent(subit)
+                .addComponent(subir)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         dialogBalanceLayout.setVerticalGroup(
@@ -141,8 +155,102 @@ public class ModInfoAdmin extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(dialogBalanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelar)
-                    .addComponent(subit))
+                    .addComponent(subir))
                 .addGap(58, 58, 58))
+        );
+
+        registrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        registrar.setText("Modificar");
+        registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarActionPerformed(evt);
+            }
+        });
+
+        cancelarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cancelarRegistro.setText("Cancelar");
+        cancelarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarRegistroActionPerformed(evt);
+            }
+        });
+
+        tituloRegistro.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        tituloRegistro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloRegistro.setText("REGISTRAR USUARIO");
+
+        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        nameLabel.setText("Nombre:");
+
+        nameText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        passwdLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        passwdLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        passwdLabel.setText("Contraseña:");
+
+        userNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        userNameLabel.setText("Nombre de Usuario:");
+
+        userNameText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        passwdText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        passwdText.setText("jPasswordField1");
+
+        javax.swing.GroupLayout dialogRegistroLayout = new javax.swing.GroupLayout(dialogRegistro.getContentPane());
+        dialogRegistro.getContentPane().setLayout(dialogRegistroLayout);
+        dialogRegistroLayout.setHorizontalGroup(
+            dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogRegistroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(dialogRegistroLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dialogRegistroLayout.createSequentialGroup()
+                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogRegistroLayout.createSequentialGroup()
+                        .addComponent(passwdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(passwdText, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogRegistroLayout.createSequentialGroup()
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(dialogRegistroLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(cancelarRegistro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registrar)
+                .addGap(121, 121, 121))
+        );
+        dialogRegistroLayout.setVerticalGroup(
+            dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogRegistroLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(tituloRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwdText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameText, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(dialogRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelarRegistro)
+                    .addComponent(registrar))
+                .addGap(51, 51, 51))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,11 +289,11 @@ public class ModInfoAdmin extends javax.swing.JFrame {
             }
         });
 
-        salir.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
+        descargarTXT.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        descargarTXT.setText("Descargar un TXT");
+        descargarTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
+                descargarTXTActionPerformed(evt);
             }
         });
 
@@ -205,6 +313,15 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(JListaOrdenaciones);
 
+        salida.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        salida.setText("X");
+        salida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salidaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,7 +329,10 @@ public class ModInfoAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -220,7 +340,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
                             .addComponent(registrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editarCreditoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(setAdminUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(descargarTXT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ordenarLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3))))
                 .addContainerGap())
@@ -228,7 +348,9 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cabecera)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -238,7 +360,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(setAdminUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(descargarTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ordenarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -263,7 +385,13 @@ public class ModInfoAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_editarCreditoUsuarioActionPerformed
 
     private void registrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarUsuarioActionPerformed
-        // TODO add your handling code here:
+        userNameText.setText("");
+        nameText.setText("");
+        passwdText.setText("");
+        dialogRegistro.pack();
+        dialogRegistro.setLocationRelativeTo(this);
+        dialogRegistro.setModal(true);
+        dialogRegistro.setVisible(true);
     }//GEN-LAST:event_registrarUsuarioActionPerformed
 
     private void setAdminUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAdminUsuarioActionPerformed
@@ -282,44 +410,98 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_setAdminUsuarioActionPerformed
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        menu.estaActivo(true);
-        this.setVisible(false);
-        dispose();
-    }//GEN-LAST:event_salirActionPerformed
+    private void descargarTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descargarTXTActionPerformed
+        try {
+            FileWriter fichero = new FileWriter("usuarios.txt");
+            fichero.write("USERNAME \tNOMBRE \tCREDITO \tTIPO");
+            for (Usuario u : listaUsuarios) {
+                fichero.write("\n" +u.toString());
+            }
+            fichero.write("\nJOKERPOKER DATABASE - NO DISTRIBUIR A TERCEROS");
+            fichero.close();
+            JOptionPane.showMessageDialog(this, "El documento ha sido descargado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "No se puede descargar el documento", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("ModInfoAdmin, descargarTXTActionPerformed:");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_descargarTXTActionPerformed
 
     private void ordenarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarListaActionPerformed
         if (JListaOrdenaciones.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un Comparador", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
             int valor = JListaOrdenaciones.getSelectedIndex();
-            OrdenarEventos(comparadores.get(valor));
+            OrdenarUsuarios(comparadores.get(valor));
         }
     }//GEN-LAST:event_ordenarListaActionPerformed
 
-    private void subitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subitActionPerformed
+    private void subirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirActionPerformed
         try {
             double bal = Double.parseDouble(texto.getText());
             Usuario u = jListaUsuarios.getSelectedValue();
             u.setBalance(bal);
             new DAOUsuario().setBalance(u);
             jListaUsuarios.repaint();
-            cancelarDialogoBalance();
+            cancelarDialogo(dialogBalance);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(dialogBalance, "Debe poner un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_subitActionPerformed
+    }//GEN-LAST:event_subirActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        cancelarDialogoBalance();
+        cancelarDialogo(dialogBalance);
     }//GEN-LAST:event_cancelarActionPerformed
 
-    private void cancelarDialogoBalance() {
-        dialogBalance.pack();
-        dialogBalance.setLocationRelativeTo(this);
-        dialogBalance.setModal(false);
-        dialogBalance.setVisible(false);
+    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+        String userName, passwd, name;
+
+        userName = userNameText.getText().trim();
+        passwd = passwdText.getText().trim();
+        name = nameText.getText().trim();
+
+        if (name.isBlank() || name.length() > 24) { //si el nombre del usuario está vacío o es demasiado largo
+            JOptionPane.showMessageDialog(this, "Debe introducir un nombre válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (passwd.isBlank() || passwd.length() > 24) { //si la contraseña está vacía o es demasiado larga
+            JOptionPane.showMessageDialog(this, "Debe introducir una contraseña válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (userName.isBlank() || userName.length() > 24) { //si el nombre de usuario está vacío o es demasiado largo
+            JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            Usuario u = new DAOUsuario().getUsuario(userName);
+            if (u == null) { //si el nombre de usuario introducido no existe
+
+                u = new Usuario(userName, passwd, name, Usuario.getInitialBalance(), false);
+                listaUsuarios.add(u);
+                new DAOUsuario().insertUsuario(u);
+                cargarUsuarios();
+
+            } else { //si el nombre de usuario introducido ya existe
+
+                JOptionPane.showMessageDialog(this, "El nombre de usuario introducido ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        }
+    }//GEN-LAST:event_registrarActionPerformed
+
+    private void cancelarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarRegistroActionPerformed
+        cancelarDialogo(dialogRegistro);
+    }//GEN-LAST:event_cancelarRegistroActionPerformed
+
+    private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
+        menu.estaActivo(true);
+        this.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_salidaMouseClicked
+
+    private void cancelarDialogo(JDialog dialogo) {
+        dialogo.pack();
+        dialogo.setLocationRelativeTo(this);
+        dialogo.setModal(false);
+        dialogo.setVisible(false);
     }
 
     /**
@@ -376,19 +558,30 @@ public class ModInfoAdmin extends javax.swing.JFrame {
     private javax.swing.JList<String> JListaOrdenaciones;
     private javax.swing.JLabel cabecera;
     private javax.swing.JButton cancelar;
+    private javax.swing.JButton cancelarRegistro;
+    private javax.swing.JButton descargarTXT;
     private javax.swing.JDialog dialogBalance;
+    private javax.swing.JDialog dialogRegistro;
     private javax.swing.JButton editarCreditoUsuario;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JList<Usuario> jListaUsuarios;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameText;
     private javax.swing.JButton ordenarLista;
+    private javax.swing.JLabel passwdLabel;
+    private javax.swing.JPasswordField passwdText;
+    private javax.swing.JButton registrar;
     private javax.swing.JButton registrarUsuario;
-    private javax.swing.JButton salir;
+    private javax.swing.JLabel salida;
     private javax.swing.JButton setAdminUsuario;
-    private javax.swing.JButton subit;
+    private javax.swing.JButton subir;
     private javax.swing.JTextField texto;
     private javax.swing.JLabel tituloDialog;
+    private javax.swing.JLabel tituloRegistro;
+    private javax.swing.JLabel userNameLabel;
+    private javax.swing.JTextField userNameText;
     // End of variables declaration//GEN-END:variables
 }

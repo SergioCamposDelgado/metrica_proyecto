@@ -15,18 +15,8 @@ import javax.swing.ImageIcon;
 public class MenuAdmin extends javax.swing.JFrame {
 
     private Usuario usuario;
-    private static BufferedImage fondoMenu;
+    private static BufferedImage fondoMenu = MenuUser.getFondoMenu();
 
-    static {
-        BufferedImage fondoMenu = null;
-        try {
-            fondoMenu = ImageIO.read(new File("fondoMenu.png"));
-        } catch (IOException e) {
-            System.out.println("MenuUser: ");
-            e.printStackTrace();
-        }
-        MenuAdmin.fondoMenu = fondoMenu;
-    }
 
     public MenuAdmin(Usuario usuario) {
         this.usuario = usuario;
@@ -107,7 +97,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         titulo.setText("Menu de administracion");
         jLayeredPane1.setLayer(titulo, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(titulo);
-        titulo.setBounds(0, 70, 1020, 80);
+        titulo.setBounds(0, 70, 1030, 80);
 
         jugar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jugar.setText("Probar Menu Usuario");
@@ -131,13 +121,13 @@ public class MenuAdmin extends javax.swing.JFrame {
         jLayeredPane1.add(editarInfoUser);
         editarInfoUser.setBounds(330, 420, 380, 30);
 
-        infoUserName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        infoUserName.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         infoUserName.setForeground(new java.awt.Color(204, 204, 204));
         infoUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         infoUserName.setText("infoUserName");
         jLayeredPane1.setLayer(infoUserName, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(infoUserName);
-        infoUserName.setBounds(240, 170, 540, 60);
+        infoUserName.setBounds(0, 170, 1030, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
