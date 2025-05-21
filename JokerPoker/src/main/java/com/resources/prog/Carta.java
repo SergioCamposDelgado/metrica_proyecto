@@ -189,7 +189,7 @@ public class Carta implements Comparable<Carta> {
                 "diamonds", 2 // Fila 2 en la imagen
         );
 
-        private final Map<String, Integer> valorMap = Map.ofEntries(
+        static private final Map<String, Integer> valorMap = Map.ofEntries(
                 Map.entry("2", 0),
                 Map.entry("3", 1),
                 Map.entry("4", 2),
