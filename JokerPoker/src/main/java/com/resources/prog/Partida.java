@@ -1,8 +1,3 @@
-/*
-
- Clase Partida.
-
- */
 package com.resources.prog;
 
 import com.resources.dao.DAOPartida;
@@ -14,7 +9,7 @@ import java.util.Comparator;
  *
  * @author Sergio Campos Delgado
  */
-public class Partida implements Comparable <Partida> {
+public class Partida implements Comparable<Partida> {
 
     protected int id;
     protected Usuario user;
@@ -66,34 +61,32 @@ public class Partida implements Comparable <Partida> {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
     public String toString() {
         String s = "";
-        s+= id +" ";
-        s+= user.getUserName() +" ";
-        s+= userWins + " ";
-        s+= date;
+        s += id + " ";
+        s += user.getUserName() + " ";
+        s += userWins + " ";
+        s += date;
         return s;
     }
 
     public int compareTo(Partida o) {
-        return this.getId()-o.getId();
+        return Integer.compare(this.getId(), o.getId());
     }
-    
-     public class ComparadorID implements Comparator<Partida> {
+
+    public static class ComparadorID implements Comparator<Partida> {
 
         public int compare(Partida p1, Partida p2) {
             return Integer.compare(p1.getId(), p2.getId());
         }
     }
-     
-    public class ComparadorDate implements Comparator<Partida> {
+
+    public static class ComparadorDate implements Comparator<Partida> {
 
         public int compare(Partida p1, Partida p2) {
             return p1.getDate().compareTo(p2.getDate());
         }
     }
-     
-     
 
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Sergio Campos Delgado
+ * @author Alicia Guerrero Márquez
  */
 public class DAOUsuario {
 
@@ -83,9 +83,10 @@ public class DAOUsuario {
         Connection conn = null;
         try {
             conn = conectarBD();
-            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET esAdmin = true where userName = ?");
-            pst.setString(1, u.getUserName());
-            ResultSet rs = pst.executeQuery();
+            PreparedStatement pst = conn.prepareStatement("UPDATE usuarios SET esAdmin = ? where userName = ?");
+            pst.setBoolean(1, u.esAdmin());
+            pst.setString(2, u.getUserName());
+            pst.execute();
 
         } catch (SQLException e) {
             System.err.println("DAOUsuario, setAdmin:" + e.getMessage());
@@ -134,7 +135,7 @@ public class DAOUsuario {
             }
 
         } catch (SQLException e) {
-            System.err.println("DAOUsuario, setBalance:" + e.getMessage());
+            System.err.println("DAOUsuario, getUsuarios:" + e.getMessage());
         } finally {
             desconectarBD(conn);
         }

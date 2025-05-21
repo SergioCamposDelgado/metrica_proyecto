@@ -7,8 +7,6 @@ import com.resources.prog.Baraja;
 import com.resources.prog.Carta;
 import com.resources.prog.Partida;
 import com.resources.prog.Usuario;
-import java.sql.Date;
-import java.time.LocalDate;
 
 public class App {
 

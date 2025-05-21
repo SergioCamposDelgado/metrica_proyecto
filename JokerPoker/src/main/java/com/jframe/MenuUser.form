@@ -21,6 +21,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="JokerPoker - Menu"/>
+    <Property name="undecorated" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -125,7 +126,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="330" y="330" width="380" height="30"/>
+              <AbsoluteConstraints x="550" y="340" width="380" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -144,7 +145,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="330" y="420" width="380" height="30"/>
+              <AbsoluteConstraints x="550" y="420" width="380" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -164,7 +165,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="70" y="330" width="200" height="30"/>
+              <AbsoluteConstraints x="0" y="330" width="550" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -184,7 +185,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="70" y="420" width="200" height="30"/>
+              <AbsoluteConstraints x="0" y="410" width="550" height="50"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -31,6 +31,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     public MenuAdmin(Usuario usuario) {
         this.usuario = usuario;
         initComponents();
+        setLocationRelativeTo(null);
 
         fondoMenuLabel.setIcon(new ImageIcon(MenuAdmin.getFondoMenu()));
 
@@ -81,6 +82,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JokerPoker - Menu");
+        setUndecorated(true);
         setResizable(false);
 
         jLayeredPane1.setLayer(fondoMenuLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
@@ -108,7 +110,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         titulo.setBounds(0, 70, 1020, 80);
 
         jugar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jugar.setText("Jugar");
+        jugar.setText("Probar Menu Usuario");
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugarActionPerformed(evt);
@@ -119,7 +121,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jugar.setBounds(330, 330, 380, 30);
 
         editarInfoUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editarInfoUser.setText("Editar información");
+        editarInfoUser.setText("Administrar Usuarios");
         editarInfoUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarInfoUserActionPerformed(evt);
@@ -135,7 +137,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         infoUserName.setText("infoUserName");
         jLayeredPane1.setLayer(infoUserName, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(infoUserName);
-        infoUserName.setBounds(70, 330, 200, 30);
+        infoUserName.setBounds(240, 170, 540, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,11 +158,13 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_salidaMouseClicked
 
     private void editarInfoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInfoUserActionPerformed
-
+        ModInfoAdmin mod = new ModInfoAdmin(usuario,this);
+        this.estaActivo(false);
+        mod.setVisible(true);
     }//GEN-LAST:event_editarInfoUserActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        
+
         MenuUser menuU = new MenuUser(usuario);
         menuU.setVisible(true);
         this.setVisible(false);

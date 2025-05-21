@@ -13,13 +13,11 @@ public class ModInfoUser extends javax.swing.JFrame {
     private Usuario user;
     private MenuUser menu;
 
-    /**
-     * Creates new form jLogin
-     */
     public ModInfoUser(Usuario user, MenuUser menu) {
         this.user = user;
         this.menu = menu;
         initComponents();
+        setLocationRelativeTo(null);
         textoNombre.setText(user.getName());
 
     }
@@ -52,8 +50,9 @@ public class ModInfoUser extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jEditorPane1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JokerPoker - Modificar Info");
+        setUndecorated(true);
         setResizable(false);
 
         cabecera.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N

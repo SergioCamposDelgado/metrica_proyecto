@@ -1,8 +1,3 @@
-/*
-
- Clase Usuario.
-
- */
 package com.resources.prog;
 
 import java.util.Comparator;
@@ -25,11 +20,11 @@ public class Usuario implements Comparable <Usuario>{
     protected static final double initialBalance = 100.00;
 
     public Usuario(String userName, String passwd, String name, double balance, boolean esAdmin) {
-        this.userName = userName;
-        this.passwd = passwd;
-        this.name = name;
-        this.balance = balance;
-        this.esAdmin = esAdmin;
+        setUserName(userName);
+        setPasswd(passwd);
+        setName(name);
+        setBalance(balance);
+        setEsAdmin(esAdmin);
     }
 
     public String getUserName() {
@@ -105,33 +100,33 @@ public class Usuario implements Comparable <Usuario>{
 
     @Override
     public String toString() {
-        return userName + "\t" + name + "\t" + balance + "\t" + esAdmin;
+        return userName + " \t" + name + " \t" + balance + " \t" + (esAdmin?"admin":"usuario");
     }
 
     public int compareTo(Usuario o) {
-        return this.getUserName().compareTo(o.getUserName());
+        return this.getUserName().toLowerCase().compareTo(o.getUserName().toLowerCase());
    }
 
-    public class ComparadorNombre implements Comparator<Usuario> {
+    public static class ComparadorNombre implements Comparator<Usuario> {
 
         public int compare(Usuario u1, Usuario u2) {
-            return u1.getName().compareTo(u2.getName());
+            return u1.getName().toLowerCase().compareTo(u2.getName().toLowerCase());
         }
 
     }
     
-    public class ComparadorUserName implements Comparator<Usuario> {
+    public static class ComparadorUserName implements Comparator<Usuario> {
 
         public int compare(Usuario u1, Usuario u2) {
-            return u1.getUserName().compareTo(u2.getUserName());
+            return u1.getUserName().toLowerCase().compareTo(u2.getUserName().toLowerCase());
         }
 
     }
     
-    public class ComparadorBalance implements Comparator<Usuario> {
+    public static class ComparadorBalance implements Comparator<Usuario> {
 
         public int compare(Usuario u1, Usuario u2) {
-            return Double.compare(u1.balance, u2.balance);
+            return - Double.compare(u1.balance, u2.balance);
         }
 
     }

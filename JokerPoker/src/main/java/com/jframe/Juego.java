@@ -41,6 +41,7 @@ public class Juego extends javax.swing.JFrame {
         this.usuario = usuario;
         contadorApuestas = 1;
         initComponents();
+        setLocationRelativeTo(null);
         titulo.setText(titulo.getText() + usuario.getName());
 
         Baraja baraja = new Baraja();
@@ -196,6 +197,7 @@ public class Juego extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JokerPoker");
+        setUndecorated(true);
         setResizable(false);
 
         cartaJ1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

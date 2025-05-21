@@ -30,7 +30,9 @@ public class MenuUser extends javax.swing.JFrame {
 
     public MenuUser(Usuario usuario) {
         this.usuario = usuario;
+
         initComponents();
+        setLocationRelativeTo(null);
 
         fondoMenuLabel.setIcon(new ImageIcon(MenuUser.getFondoMenu()));
 
@@ -88,6 +90,7 @@ public class MenuUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JokerPoker - Menu");
+        setUndecorated(true);
         setResizable(false);
 
         jLayeredPane1.setLayer(fondoMenuLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
@@ -123,7 +126,7 @@ public class MenuUser extends javax.swing.JFrame {
         });
         jLayeredPane1.setLayer(jugar, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(jugar);
-        jugar.setBounds(330, 330, 380, 30);
+        jugar.setBounds(550, 340, 380, 30);
 
         editarInfoUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editarInfoUser.setText("Editar información");
@@ -134,7 +137,7 @@ public class MenuUser extends javax.swing.JFrame {
         });
         jLayeredPane1.setLayer(editarInfoUser, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(editarInfoUser);
-        editarInfoUser.setBounds(330, 420, 380, 30);
+        editarInfoUser.setBounds(550, 420, 380, 30);
 
         infoUserName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         infoUserName.setForeground(new java.awt.Color(204, 204, 204));
@@ -142,7 +145,7 @@ public class MenuUser extends javax.swing.JFrame {
         infoUserName.setText("infoUserName");
         jLayeredPane1.setLayer(infoUserName, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(infoUserName);
-        infoUserName.setBounds(70, 330, 200, 30);
+        infoUserName.setBounds(0, 330, 550, 50);
 
         infoCredito.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         infoCredito.setForeground(new java.awt.Color(204, 204, 204));
@@ -150,7 +153,7 @@ public class MenuUser extends javax.swing.JFrame {
         infoCredito.setText("infoCredito");
         jLayeredPane1.setLayer(infoCredito, javax.swing.JLayeredPane.MODAL_LAYER);
         jLayeredPane1.add(infoCredito);
-        infoCredito.setBounds(70, 420, 200, 30);
+        infoCredito.setBounds(0, 410, 550, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

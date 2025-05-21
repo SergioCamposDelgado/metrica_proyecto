@@ -1,11 +1,10 @@
 /*
  * DAOPartida.
- * Crear una partida.
+ * Operaciones de acceso a datos para la entidad Partida
  */
 package com.resources.dao;
 
 import com.resources.prog.Partida;
-import com.resources.prog.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
