@@ -50,12 +50,6 @@ public class Registro extends javax.swing.JFrame {
         labelNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelNombreUsuario.setText("Nombre de usuario:");
 
-        textoNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreUsuarioActionPerformed(evt);
-            }
-        });
-
         labelContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelContraseña.setText("Contraseña:");
 
@@ -67,12 +61,6 @@ public class Registro extends javax.swing.JFrame {
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
-            }
-        });
-
-        textoNombreUsuarioName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreUsuarioNameActionPerformed(evt);
             }
         });
 
@@ -141,64 +129,47 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
-    //abre el menú de login
-    Login abrir = new Login();
-    abrir.setVisible(true);
-    this.setVisible(false);
-    dispose();
+        //abre el menú de login
+        Login abrir = new Login();
+        abrir.setVisible(true);
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_botonLoginActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-       String login = textoNombreUsuario.getText().trim();
-       String nombre = textoNombreUsuarioName.getText().trim();
-       String passwd = textoContraseña.getText().trim();
-      
-       if (nombre.isBlank() || nombre.length()>24) { //si el nombre del usuario está vacío o es demasiado largo
-          JOptionPane.showMessageDialog(this, "Debe introducir un nombre válido.", "Error", JOptionPane.ERROR_MESSAGE);
-       } else if (passwd.isBlank() || passwd.length()>24) { //si la contraseña está vacía o es demasiado larga
-          JOptionPane.showMessageDialog(this, "Debe introducir una contraseña válida.", "Error", JOptionPane.ERROR_MESSAGE);
-       } else if (login.isBlank() || login.length()>24) { //si el nombre de usuario está vacío o es demasiado largo
-          JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
-           
-       } else { 
-           
-           Usuario u = new DAOUsuario().getUsuario(login);
-           if (u == null) { //si el nombre de usuario introducido no existe
-               
-           u = new Usuario(login, passwd, nombre, Usuario.getInitialBalance(), false);
-           new DAOUsuario().insertUsuario(u);
-           Login abrir = new Login();
-           abrir.setVisible(true);
-           this.setVisible(false);
-           dispose();
-               
-           } else { //si el nombre de usuario introducido ya existe
-               
-           JOptionPane.showMessageDialog(this, "El nombre de usuario introducido ya existe.", "Error", JOptionPane.ERROR_MESSAGE);    
-               
-           }
-           
-       } 
-       
-       
-       
-        
-        
-        
-        
-        
-        
-        
+        String login = textoNombreUsuario.getText().trim();
+        String nombre = textoNombreUsuarioName.getText().trim();
+        String passwd = textoContraseña.getText().trim();
+
+        if (nombre.isBlank() || nombre.length() > 24) { //si el nombre del usuario está vacío o es demasiado largo
+            JOptionPane.showMessageDialog(this, "Debe introducir un nombre válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (passwd.isBlank() || passwd.length() > 24) { //si la contraseña está vacía o es demasiado larga
+            JOptionPane.showMessageDialog(this, "Debe introducir una contraseña válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (login.isBlank() || login.length() > 24) { //si el nombre de usuario está vacío o es demasiado largo
+            JOptionPane.showMessageDialog(this, "Debe introducir un nombre de usuario válido", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            Usuario u = new DAOUsuario().getUsuario(login);
+            if (u == null) { //si el nombre de usuario introducido no existe
+
+                u = new Usuario(login, passwd, nombre, Usuario.getInitialBalance(), false);
+                new DAOUsuario().insertUsuario(u);
+                Login abrir = new Login();
+                abrir.setVisible(true);
+                this.setVisible(false);
+                dispose();
+
+            } else { //si el nombre de usuario introducido ya existe
+
+                JOptionPane.showMessageDialog(this, "El nombre de usuario introducido ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        }
+
 
     }//GEN-LAST:event_botonAceptarActionPerformed
-
-    private void textoNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreUsuarioActionPerformed
-
-    private void textoNombreUsuarioNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreUsuarioNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreUsuarioNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

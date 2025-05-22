@@ -160,7 +160,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
         );
 
         registrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        registrar.setText("Modificar");
+        registrar.setText("Registrar");
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
@@ -415,7 +415,7 @@ public class ModInfoAdmin extends javax.swing.JFrame {
             FileWriter fichero = new FileWriter("usuarios.txt");
             fichero.write("USERNAME \tNOMBRE \tCREDITO \tTIPO");
             for (Usuario u : listaUsuarios) {
-                fichero.write("\n" +u.toString());
+                fichero.write("\n" + u.toString());
             }
             fichero.write("\nJOKERPOKER DATABASE - NO DISTRIBUIR A TERCEROS");
             fichero.close();

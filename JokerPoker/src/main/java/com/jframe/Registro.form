@@ -131,9 +131,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoNombreUsuario">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoNombreUsuarioActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelContrase&#xf1;a">
       <Properties>
@@ -165,9 +162,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textoNombreUsuarioName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoNombreUsuarioNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
