@@ -157,7 +157,13 @@ public class DAOPartida {
         } catch (NullPointerException e) {
             System.out.println("DAOPartida, getMaxID: ");
             e.printStackTrace();
+            
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("DAOPartida, getMaxID: ");
+            e.printStackTrace();
+              
         }
+
         return id;
     }
 

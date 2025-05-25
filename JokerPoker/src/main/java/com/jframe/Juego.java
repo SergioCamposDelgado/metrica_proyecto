@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -32,19 +33,25 @@ public class Juego extends javax.swing.JFrame {
 
     private List<Carta> manoJoker;
 
+    private List<JButton> descartes;
+
     private Usuario usuario;
     private MenuUser menu;
     private double bote;
+    private Baraja baraja;
 
     public Juego(Usuario usuario, MenuUser menu) {
         this.menu = menu;
         this.usuario = usuario;
+
         contadorApuestas = 1;
         initComponents();
         setLocationRelativeTo(null);
+        reintentar.setVisible(false);
+        reintentar.setEnabled(false);
         titulo.setText(titulo.getText() + usuario.getName());
 
-        Baraja baraja = new Baraja();
+        baraja = new Baraja();
         baraja.barajar();
 
         //Jugador
@@ -98,6 +105,13 @@ public class Juego extends javax.swing.JFrame {
         cartasJokerT.add(cartaJT3);
         cartasJokerT.add(cartaJT4);
         cartasJokerT.add(cartaJT5);
+
+        descartes = new ArrayList();
+
+        descartes.add(descartarBoton1);
+        descartes.add(descartarBoton2);
+        descartes.add(descartarBoton3);
+        descartes.add(descartarBoton4);
 
         for (int i = 0; i < manoPlayer.size(); i++) {
             cartasPlayer.get(i).setIcon(new ImageIcon(manoPlayer.get(i).getSprite()));
@@ -183,6 +197,11 @@ public class Juego extends javax.swing.JFrame {
         creditoLabel = new javax.swing.JLabel();
         salida = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
+        descartarBoton1 = new javax.swing.JButton();
+        descartarBoton2 = new javax.swing.JButton();
+        descartarBoton3 = new javax.swing.JButton();
+        descartarBoton4 = new javax.swing.JButton();
+        reintentar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -379,6 +398,65 @@ public class Juego extends javax.swing.JFrame {
         jLayeredPane1.add(titulo);
         titulo.setBounds(40, 20, 790, 80);
 
+        descartarBoton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descartarBoton1.setText("Descartar");
+        descartarBoton1.setToolTipText("");
+        descartarBoton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartarBoton1ActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(descartarBoton1, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(descartarBoton1);
+        descartarBoton1.setBounds(60, 440, 90, 20);
+
+        descartarBoton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descartarBoton2.setText("Descartar");
+        descartarBoton2.setToolTipText("");
+        descartarBoton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartarBoton2ActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(descartarBoton2, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(descartarBoton2);
+        descartarBoton2.setBounds(220, 440, 90, 20);
+
+        descartarBoton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descartarBoton3.setText("Descartar");
+        descartarBoton3.setToolTipText("");
+        descartarBoton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartarBoton3ActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(descartarBoton3, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(descartarBoton3);
+        descartarBoton3.setBounds(380, 440, 90, 20);
+
+        descartarBoton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descartarBoton4.setText("Descartar");
+        descartarBoton4.setToolTipText("");
+        descartarBoton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartarBoton4ActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(descartarBoton4, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(descartarBoton4);
+        descartarBoton4.setBounds(540, 440, 90, 20);
+
+        reintentar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        reintentar.setText("Reintentar");
+        reintentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reintentarActionPerformed(evt);
+            }
+        });
+        jLayeredPane1.setLayer(reintentar, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.add(reintentar);
+        reintentar.setBounds(280, 140, 300, 50);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -401,6 +479,9 @@ public class Juego extends javax.swing.JFrame {
             cartasJokerT.stream().forEach(c -> c.setIcon(null));
             apostarBoton.setEnabled(false);
             rendirseBoton.setEnabled(false);
+            descartes.forEach(d -> d.setEnabled(false));
+            reintentar.setVisible(true);
+            reintentar.setEnabled(true);
 
             menu.estaActivo(true);
             pack();
@@ -430,6 +511,10 @@ public class Juego extends javax.swing.JFrame {
             cartasJokerT.forEach(c -> c.setIcon(null));
             int cmp = Baraja.compararManos(manoPlayer, manoJoker);
 
+            descartes.forEach(d -> d.setEnabled(false));
+            reintentar.setVisible(true);
+            reintentar.setEnabled(true);
+
             if (cmp < 0) {
                 int valor = Baraja.evaluarMano(manoPlayer);
                 JOptionPane.showMessageDialog(this, "Has ganado por " + Baraja.descripcionMano(valor), "Has ganado", JOptionPane.INFORMATION_MESSAGE);
@@ -458,13 +543,13 @@ public class Juego extends javax.swing.JFrame {
                     creditoDouble.setText(usuario.getBalance() + "");
                 }
             }
-            
-            boolean gano = cmp<0;
-            
+
+            boolean gano = cmp < 0;
+
             DAOPartida daoP = new DAOPartida();
-            Partida partida = new Partida ((daoP.getMaxID()+1) , usuario, gano, Date.valueOf(LocalDate.now()));
+            Partida partida = new Partida((daoP.getMaxID() + 1), usuario, gano, Date.valueOf(LocalDate.now()));
             daoP.insertPartida(partida);
-            
+
             menu.estaActivo(true);
         }
 
@@ -472,11 +557,53 @@ public class Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_apostarBotonActionPerformed
 
     private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
-                new DAOUsuario().setBalance(usuario);
-                menu.estaActivo(true);
-                dispose();
+        new DAOUsuario().setBalance(usuario);
+        menu.estaActivo(true);
+        dispose();
     }//GEN-LAST:event_salidaMouseClicked
 
+    private void descartarBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartarBoton1ActionPerformed
+        descarte(1);
+    }//GEN-LAST:event_descartarBoton1ActionPerformed
+
+    private void descartarBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartarBoton2ActionPerformed
+        descarte(2);
+    }//GEN-LAST:event_descartarBoton2ActionPerformed
+
+    private void descartarBoton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartarBoton3ActionPerformed
+        descarte(3);
+    }//GEN-LAST:event_descartarBoton3ActionPerformed
+
+    private void descartarBoton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartarBoton4ActionPerformed
+        descarte(4);
+    }//GEN-LAST:event_descartarBoton4ActionPerformed
+
+    private void reintentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reintentarActionPerformed
+        Juego nuevo = new Juego(usuario, menu);
+        nuevo.setVisible(true);
+        this.setVisible(false);
+
+        dispose();
+    }//GEN-LAST:event_reintentarActionPerformed
+
+    private void descarte(int pos) {
+        if (contadorApuestas >= (pos - 1)) {
+            descartes.get(pos - 1).setEnabled(false);
+            manoPlayer.set((pos - 1), baraja.repartir());
+            cartasPlayer.get(pos - 1).setIcon(new ImageIcon(manoPlayer.get(pos - 1).getSprite()));
+
+            if (usuario.getBalance() >= 10.00) {
+                usuario.setBalance(usuario.getBalance() - 10.00);
+                new DAOUsuario().setBalance(usuario);
+                bote += 20.00;
+
+                boteDouble.setText(bote + "");
+                creditoDouble.setText(usuario.getBalance() + "");
+            }
+
+            repaint();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apostarBoton;
@@ -514,9 +641,14 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JLabel cartaPT5;
     private javax.swing.JLabel creditoDouble;
     private javax.swing.JLabel creditoLabel;
+    private javax.swing.JButton descartarBoton1;
+    private javax.swing.JButton descartarBoton2;
+    private javax.swing.JButton descartarBoton3;
+    private javax.swing.JButton descartarBoton4;
     private javax.swing.JLabel fondoCartasP;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JButton reintentar;
     private javax.swing.JButton rendirseBoton;
     private javax.swing.JLabel salida;
     private javax.swing.JLabel titulo;

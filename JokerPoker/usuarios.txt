@@ -1,9 +1,11 @@
 USERNAME 	NOMBRE 	CREDITO 	TIPO
-admin 	administrador 	99999.99 	admin
-claritax 	Clara 	999.9 	usuario
-donpollo2 	Paco 	150.0 	usuario
-doñapollo 	pepa 	100.0 	usuario
-gros michel 	jimbo 	60.0 	usuario
-donpollo 	pepe 	5.5 	admin
-sergioscd 	Sergio 	0.0 	usuario
+a b c 	A B CD 	100.0 	usuario
+admin 	Administrador 	99799.99 	admin
+Alicia 	Alicia_Guerrero 	100.0 	usuario
+joselito 	PEPE 	190.0 	usuario
+juanillo 	Juan 	200.2 	usuario
+paco 	Paco 	-20.0 	usuario
+sergioscd 	Sergio2 	20.2 	usuario
+test_user 	Test User 	100.0 	usuario
+testuser_partida 	Jugador de prueba 	50.0 	usuario
 JOKERPOKER DATABASE - NO DISTRIBUIR A TERCEROS
